@@ -9,7 +9,7 @@ public class Patient {
     private String birthday;
     private String nurses[];
     private String doctor;
-    private List<Precription> prescriptions;
+    public List<Precription> prescriptions;
 
     //Returns individual prescription from prescription list
     public Precription getPrescription(int index) {
