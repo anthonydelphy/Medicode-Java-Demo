@@ -7,6 +7,11 @@ public class Database{
         private List<Nurse> nurses;
         private List<Patient> patients;
 
+        //Add a new patient account
+        public void addPatient(Patient patient){
+                patients.add(patient);
+        }
+
         //Getters for specific patients
         public Patient getPatient(int index) {
                 return patients.get(index);

@@ -7,7 +7,6 @@ public class Patient {
     private String username;
     private String password;
     private String birthday;
-    private String nurses[];
     private String doctor;
     public List<Precription> prescriptions;
 
@@ -63,14 +62,6 @@ public class Patient {
 
     public void setBirthday(String birthday) {
         this.birthday = birthday;
-    }
-
-    public String[] getNurses() {
-        return nurses;
-    }
-
-    public void setNurses(String[] nurses) {
-        this.nurses = nurses;
     }
 
     public String getDoctor() {

@@ -3,41 +3,56 @@
     {
       "firstName": "John",
       "lastName": "Doe",
-      "birthday": "01/01/1990",
       "username": "johndoe01011990",
       "password": "password",
+      "birthday": "01/01/1990",
       "patients": [
         "robertsmith03032000"
       ],
       "nurses": []
-    }],
+    }
+  ],
   "nurses": [
     {
       "firstName": "Jane",
       "lastName": "William",
-      "birthday": "03/01/2000",
-      "username": "johndoe01011990",
+      "username": "janewilliam200-",
       "password": "password",
+      "birthday": "03/01/2000",
       "patients": [
         "robertsmith03032000"
       ],
       "doctor": "johndoe01011990"
-    }],
+    }
+  ],
   "patients": [
     {
       "firstName": "Spencer",
       "lastName": "Shay",
-      "birthday": "11/20/2005",
-      "username": "SpencerShay2005",
+      "username": "spencershay2005",
       "password": "password",
+      "birthday": "11/20/2005",
       "doctor": "johndoe01011990",
-      "nurses": [],
       "prescriptions": [
         {
           "prescName": "Ibuprofen 500 mg",
           "expDate": "05/01/2050",
           "quantity": 2
-        }]
-      }
-    ]
+        }
+      ]
+    },
+    {
+      "firstName": "anthony",
+      "lastName": "delphy",
+      "username": "anthonydelphy05292001",
+      "birthday": "05/29/2001"
+    },
+    {
+      "firstName": "Diego",
+      "lastName": "Escalante",
+      "username": "diegoescalante03241920",
+      "password": "password",
+      "birthday": "03/24/1920"
+    }
+  ]
 }
