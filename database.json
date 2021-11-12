@@ -5,24 +5,66 @@
       "lastName": "Doe",
       "username": "johndoe01011990",
       "password": "password",
+      "phone": "123-456-7890",
       "birthday": "01/01/1990",
       "patients": [
         "robertsmith03032000"
       ],
-      "nurses": []
+      "nurses": [],
+      "messages": [
+        {
+          "sender": "spencershay2005",
+          "recipient": "johndoe01011990",
+          "subject": "test",
+          "message": "testing"
+        }
+      ]
     }
   ],
   "nurses": [
     {
       "firstName": "Jane",
       "lastName": "William",
-      "username": "janewilliam200-",
+      "username": "janewilliam2000",
+      "phone": "123-456-7890",
       "password": "password",
       "birthday": "03/01/2000",
       "patients": [
         "robertsmith03032000"
       ],
-      "doctor": "johndoe01011990"
+      "doctor": "johndoe01011990",
+      "messages": [
+        {
+          "sender": "spencershay2005",
+          "recipient": "janewilliam2000",
+          "subject": "test",
+          "message": "testing"
+        },
+        {
+          "sender": "spencershay2005",
+          "recipient": "janewilliam2000",
+          "subject": "testing1",
+          "message": "testing2"
+        },
+        {
+          "sender": "spencershay2005",
+          "recipient": "janewilliam2000",
+          "subject": "this",
+          "message": "should"
+        },
+        {
+          "sender": "spencershay2005",
+          "recipient": "janewilliam2000",
+          "subject": "test",
+          "message": "this"
+        },
+        {
+          "sender": "spencershay2005",
+          "recipient": "janewilliam2000",
+          "subject": "testing",
+          "message": "again"
+        }
+      ]
     }
   ],
   "patients": [
@@ -31,6 +73,7 @@
       "lastName": "Shay",
       "username": "spencershay2005",
       "password": "password",
+      "phone": "123-456-7890",
       "birthday": "11/20/2005",
       "doctor": "johndoe01011990",
       "prescriptions": [
@@ -39,20 +82,25 @@
           "expDate": "05/01/2050",
           "quantity": 2
         }
+      ],
+      "pastAppointments": [
+        {
+          "weight": 150,
+          "height": "5,7",
+          "temp": 97.8,
+          "bloodPressure": "120/80",
+          "allergies": "None",
+          "healthConcerns": "Ankle hurts",
+          "date": "11/01/2020",
+          "time": "12:00"
+        }
+      ],
+      "appointments": [
+        {
+          "date": "11/20/2020",
+          "time": "12:00"
+        }
       ]
-    },
-    {
-      "firstName": "anthony",
-      "lastName": "delphy",
-      "username": "anthonydelphy05292001",
-      "birthday": "05/29/2001"
-    },
-    {
-      "firstName": "Diego",
-      "lastName": "Escalante",
-      "username": "diegoescalante03241920",
-      "password": "password",
-      "birthday": "03/24/1920"
     }
   ]
 }

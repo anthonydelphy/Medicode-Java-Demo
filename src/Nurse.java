@@ -1,11 +1,23 @@
+import java.util.List;
+
 public class Nurse{
     private String firstName;
     private String lastName;
     private String username;
+    private String phone;
     private String password;
     private String birthday;
     private String patients[];
     private String doctor;
+    private List<Message> messages;
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -57,5 +69,16 @@ public class Nurse{
 
     public String getDoctor() {
         return doctor;
+    }
+
+    @Override
+    public String toString() {
+        return "Nurse{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", username='" + username + '\'' +
+                ", phone='" + phone + '\'' +
+                ", birthday='" + birthday + '\'' +
+                '}';
     }
 }

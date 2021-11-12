@@ -5,68 +5,67 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Locale;
-import java.util.Scanner;
+import java.util.*;
 import java.io.IOException;
 
 public class main{
 
+    private static Database db;
+    private static Scanner scanner;
+
     public static void main(String[] args){
-        Database db = new Database();
+        db = new Database();
         String content = "";
-        Scanner scan = new Scanner(System.in);
+        scanner = new Scanner(System.in);
         try {
             content = readFile("database.json", StandardCharsets.UTF_8);
         }
         catch(IOException e){};
         Gson gson = new Gson();
-        db = gson.fromJson(content, Database.class);
+        db = gson.fromJson(content, db.getClass());
 
-        //Example of getting information
-        //System.out.println(db.getPatient(0).getPrescription(0).toString());
+        logInMenu();
 
-        logInMenu(db);
+        scanner.close();
     }
 
-    public static void logInMenu(Database db)
+    public static void logInMenu()
     {
-        Scanner scan = new Scanner(System.in);
         //Choose what account to log into
         System.out.println("What type of account do you have?");
         System.out.println("1. Patient");
         System.out.println("2. Nurse");
         System.out.println("3. Doctor");
 
-        int typeOfAccount = scan.nextInt();
+        int typeOfAccount = scanner.nextInt();
 
         switch(typeOfAccount) {
             case 1: //PATIENT
                 System.out.println("What would you like to do?\n1.Log in\n2.Create an Account");
-                int logIn = scan.nextInt();
+                int logIn = scanner.nextInt();
 
                 if(logIn == 1){ //Log into account
-                    logInPatient(db);
+                    logInPatient();
                 }
                 else if(logIn == 2){ //Create an Account
-                    createPatientAccount(db);
-                    updateJSON(db);
+                    createPatientAccount();
+                    updateJSON();
 
                 }
                 break;
             case 2: //NURSE
-                logInNurse(db);
+                logInNurse();
 
                 break;
             case 3: //DOCTOR
-                logInDoctor(db);
+                logInDoctor();
                 break;
             default:
                 System.out.println("Incorrect input. Please try again.");
         }
-        scan.close();
     }
 
-    public static void createPatientAccount(Database db){
+    public static void createPatientAccount(){
         Scanner createAccountScanner = new Scanner(System.in);
         int flag = 0; //Flag if user is trying to create an existing account. 1 = account already exists.
 
@@ -82,14 +81,17 @@ public class main{
         System.out.println("Create a Password: ");
         String password = createAccountScanner.next();
 
+
         //Give account a specific username.
         String username = firstName + lastName + birthday.replace("/", "");
         username = username.toLowerCase(Locale.ROOT);
 
         //Check to see if account already exists in the database.
         for(int i = 0; i < db.getPatientList().size(); i++)
-            if(db.getPatient(i).getUsername().equals(username))
+            if (db.getPatientList().get(i).getUsername().equals(username)) {
                 flag = 1;
+                break;
+            }
 
         if(flag==0) {
             System.out.println("Your account username will be: " + username);
@@ -113,20 +115,48 @@ public class main{
         createAccountScanner.close();
     }
 
-    public static void logInPatient(Database db){
+    public static void logInPatient(){
         int flag = 0;
-        Scanner patientLogInScan = new Scanner(System.in);
+        int index = -1; //If log-in successful, store index of patient in database
         while (flag == 0) {
 
             System.out.println("Username:");
-            String username = patientLogInScan.next().toLowerCase(Locale.ROOT);
+            String username = scanner.next().toLowerCase(Locale.ROOT);
 
             System.out.println("Password:");
-            String password = patientLogInScan.next().toLowerCase(Locale.ROOT);
+            String password = scanner.next().toLowerCase(Locale.ROOT);
 
             for(int i = 0; i< db.getPatientList().size(); i++){
-                if(username.equals(db.getPatient(i).getUsername().toLowerCase(Locale.ROOT))
-                        && password.equals(db.getPatient(i).getPassword())){
+                if(username.equals(db.getPatientList().get(i).getUsername().toLowerCase(Locale.ROOT))
+                        && password.equals(db.getPatientList().get(i).getPassword())){
+                    System.out.println("Log in successful");
+                    flag = 1;
+                    index = i;
+                }
+            }
+
+            if(flag == 0){
+                System.out.println("This is not a correct username/password combination.\nPlease try again.");
+            }
+            else {//load patient home page
+                patientHomePage(index);
+            }
+        }
+    }
+
+    public static void logInNurse(){
+        int flag = 0;
+        while (flag == 0) {
+
+            System.out.println("Username:");
+            String username = scanner.next().toLowerCase(Locale.ROOT);
+
+            System.out.println("Password:");
+            String password = scanner.next().toLowerCase(Locale.ROOT);
+
+            for(int i = 0; i< db.getPatientList().size(); i++){
+                if(username.equals(db.getNursesList().get(i).getUsername().toLowerCase(Locale.ROOT))
+                        && password.equals(db.getNursesList().get(i).getPassword())){
                     System.out.println("Log in successful");
                     flag = 1;
                 }
@@ -135,24 +165,25 @@ public class main{
             if(flag == 0){
                 System.out.println("This is not a correct username/password combination.\nPlease try again.");
             }
+            else if(flag == 1) { //Load nurse home page
+
+            }
         }
-        patientLogInScan.close();
     }
 
-    public static void logInNurse(Database db){
+    public static void logInDoctor(){
         int flag = 0;
-        Scanner nurseLogInScan = new Scanner(System.in);
         while (flag == 0) {
 
             System.out.println("Username:");
-            String username = nurseLogInScan.next().toLowerCase(Locale.ROOT);
+            String username = scanner.next().toLowerCase(Locale.ROOT);
 
             System.out.println("Password:");
-            String password = nurseLogInScan.next().toLowerCase(Locale.ROOT);
+            String password = scanner.next().toLowerCase(Locale.ROOT);
 
             for(int i = 0; i< db.getPatientList().size(); i++){
-                if(username.equals(db.getNurse(i).getUsername().toLowerCase(Locale.ROOT))
-                        && password.equals(db.getNurse(i).getPassword())){
+                if(username.equals(db.getDoctorsList().get(i).getUsername().toLowerCase(Locale.ROOT))
+                        && password.equals(db.getDoctorsList().get(i).getPassword())){
                     System.out.println("Log in successful");
                     flag = 1;
                 }
@@ -161,37 +192,177 @@ public class main{
             if(flag == 0){
                 System.out.println("This is not a correct username/password combination.\nPlease try again.");
             }
+            else if (flag==1){//Load Doctor home page
+
+            }
         }
-        nurseLogInScan.close();
     }
 
-    public static void logInDoctor(Database db){
+    public static void patientHomePage(int index){
         int flag = 0;
-        Scanner doctorLogInScan = new Scanner(System.in);
-        while (flag == 0) {
+        while(flag == 0) {
+            System.out.println("What would you like to do?\n" +
+                    "1. View Upcoming Visits\n" +
+                    "2. View Past Visits\n" +
+                    "3. View Prescriptions\n" +
+                    "4. View Messages\n" +
+                    "5. Send Message\n" +
+                    "5. View Your Doctor\n" +
+                    "6. View Your Profile\n" +
+                    "0. Log Out\n");
 
-            System.out.println("Username:");
-            String username = doctorLogInScan.next().toLowerCase(Locale.ROOT);
 
-            System.out.println("Password:");
-            String password = doctorLogInScan.next().toLowerCase(Locale.ROOT);
-
-            for(int i = 0; i< db.getPatientList().size(); i++){
-                if(username.equals(db.getDoctor(i).getUsername().toLowerCase(Locale.ROOT))
-                        && password.equals(db.getDoctor(i).getPassword())){
-                    System.out.println("Log in successful");
+            int menuInput = scanner.nextInt();
+            switch (menuInput) {
+                case 0: //Log Out
                     flag = 1;
+                    logInMenu();
+                    break;
+                case 1: //View Upcoming Visits
+                    for (int i = 0; i < db.getPatientList().get(index).getAppointments().size(); i++)
+                        System.out.println(db.getPatientList().get(index).getAppointments().get(i).upcomingAppointmentToString());
+                    break;
+                case 2: //View Past Visits
+                    for (int i = 0; i < db.getPatientList().get(index).getPastAppointments().size(); i++)
+                        System.out.println(db.getPatientList().get(index).getPastAppointments().get(i).toString());
+                    break;
+                case 3://View Prescriptions
+                    for (int i = 0; i < db.getPatientList().get(index).getPrescriptionList().size(); i++)
+                        System.out.println(db.getPatientList().get(index).getPrescription(i).toString());
+                    break;
+                case 4://View Messages
+                    for(int i =0; i < db.getPatientList().get(index).getMessages().size(); i++)
+                        System.out.println(db.getPatientList().get(index).getMessages().get(i).toString());
+                    break;
+                case 5: //Send a message
+                    sendMessage(db.getPatientList().get(index).getUsername());
+                    break;
+                case 6://View Doctor
+                    int docIndex = -1;
+                    for(int i = 0; i < db.getDoctorsList().size(); i++){
+                        if(db.getDoctorsList().get(i).getUsername() == db.getPatientList().get(index).getDoctor()){
+                            docIndex = i;
+                        }
+                    }
+                    System.out.println(db.getDoctorsList().get(docIndex).toString());
+                    break;
+                case 7://View Profile
+                    System.out.println(db.getPatientList().get(index).toString());
+                    break;
+
+            }
+        }
+
+
+
+
+    }
+
+    public static void sendMessage(String senderUsername){
+        int flag = 0;
+        int type = -1; //-1 = undecided, 0 = patient, 1 = nurse, 2 = doctor
+        int index = -1; //Index of the recipient in their respective category.
+        String recipientUsername = "";
+
+
+        //Get recipient username
+        while(flag == 0) {
+
+            System.out.println("Type recipient username:");
+            recipientUsername = scanner.next();
+
+
+            //Check all patients for username
+            for(int i = 0; i < db.getPatientList().size(); i++){
+                if(recipientUsername.equals(db.getPatientList().get(i).getUsername())) {
+                    flag = 1; //User found
+                    type = 0;
+                    index = i;
+                    break;
                 }
             }
 
-            if(flag == 0){
-                System.out.println("This is not a correct username/password combination.\nPlease try again.");
+            //Check all nurses for username
+            for(int i = 0; i < db.getNursesList().size(); i++){
+                if(recipientUsername.equals(db.getNursesList().get(i).getUsername())) {
+                    flag = 1; //User found
+                    type = 1;
+                    index = i;
+                    break;
+                }
             }
+
+            //Check all Doctors for username
+            for(int i = 0; i < db.getDoctorsList().size(); i++){
+                if(recipientUsername.equals(db.getDoctorsList().get(i).getUsername())) {
+                    flag = 1; //User found
+                    type = 2;
+                    index = i;
+                    break;
+                }
+            }
+
+            if(flag == 0)
+                System.out.println("User not found, please try again.");
         }
-        doctorLogInScan.close();
+
+        System.out.println("What is the subject of this e-mail?");
+        String subject = scanner.next();
+        System.out.println("What is the message you would like to send?");
+        String message = scanner.next();
+
+        //Create message object and fill information
+        Message newMessage = new Message();
+
+        newMessage.setMessage(message);
+        newMessage.setRecipient(recipientUsername);
+        newMessage.setSender(senderUsername);
+        newMessage.setSubject(subject);
+
+        //Add message to the correct user's account
+        List<Message> placeholder = new ArrayList<>();
+        switch(type){
+            case 0: //Sending to a patient
+                if(db.getPatientList().get(index).getMessages() == null) {
+                    placeholder.add(newMessage);
+                    db.getPatientList().get(index).setMessages(placeholder);
+                }
+                else {
+                    placeholder = db.getPatientList().get(index).getMessages();
+                    placeholder.add(newMessage);
+                    db.getPatientList().get(index).setMessages(placeholder);
+                }
+                break;
+            case 1: //Sending to a nurse
+                if(db.getNursesList().get(index).getMessages() == null)
+                {
+                    placeholder.add(newMessage);
+                    db.getNursesList().get(index).setMessages(placeholder);
+                }
+                else {
+                    placeholder = db.getNursesList().get(index).getMessages();
+                    placeholder.add(newMessage);
+                    db.getNursesList().get(index).setMessages(placeholder);
+                }
+                break;
+            case 2: //Sending to a doctor
+                if(db.getDoctorsList().get(index).getMessages() == null){
+                    placeholder.add(newMessage);
+                    db.getDoctorsList().get(index).setMessages(placeholder);
+                }
+                else {
+                    placeholder = db.getDoctorsList().get(index).getMessages();
+                    placeholder.add(newMessage);
+                    db.getDoctorsList().get(index).setMessages(placeholder);
+                }
+                break;
+        }
+
+        //Update JSON with new message data.
+        updateJSON();
     }
 
-    public static void updateJSON(Database db){
+    public static void updateJSON(){
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String newJSON = gson.toJson(db);
 

@@ -12,19 +12,6 @@ public class Database{
                 patients.add(patient);
         }
 
-        //Getters for specific patients
-        public Patient getPatient(int index) {
-                return patients.get(index);
-        }
-
-        public Nurse getNurse(int index) {
-                return nurses.get(index);
-        }
-
-        public Doctor getDoctor(int index) {
-                return doctors.get(index);
-        }
-
         //Getters and setters for full list of doctors, nurses, and patients
         public List<Doctor> getDoctorsList() {
                 return doctors;

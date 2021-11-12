@@ -1,4 +1,3 @@
-import javax.print.attribute.standard.PresentationDirection;
 import java.util.List;
 
 public class Patient {
@@ -6,9 +5,42 @@ public class Patient {
     private String lastName;
     private String username;
     private String password;
+    private String phone;
     private String birthday;
     private String doctor;
-    public List<Precription> prescriptions;
+    private List<Precription> prescriptions;
+    private List<PastAppointment> pastAppointments;
+    private List<Appointments> appointments;
+    private List<Message> messages;
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
+
+    public List<Precription> getPrescriptions() {
+        return prescriptions;
+    }
+
+    public List<PastAppointment> getPastAppointments() {
+        return pastAppointments;
+    }
+
+
+    public void setPastAppointments(List<PastAppointment> pastAppointments) {
+        this.pastAppointments = pastAppointments;
+    }
+
+    public List<Appointments> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(List<Appointments> appointments) {
+        this.appointments = appointments;
+    }
 
     //Returns individual prescription from prescription list
     public Precription getPrescription(int index) {
@@ -70,5 +102,16 @@ public class Patient {
 
     public void setDoctor(String doctor) {
         this.doctor = doctor;
+    }
+
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", username='" + username + '\'' +
+                ", phone='" + phone + '\'' +
+                ", birthday='" + birthday + '\'' +
+                '}';
     }
 }
