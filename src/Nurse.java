@@ -1,4 +1,4 @@
-public class Nurse extends person{
+public class Nurse extends Person{
 
     private String patients[];
     private String doctor;

@@ -1,6 +1,6 @@
 import java.util.List;
 
-public class Doctor extends person{
+public class Doctor extends Person{
 
     private String patients[];
     private String nurses[];
@@ -12,6 +12,10 @@ public class Doctor extends person{
 
     public void setPatients(String[] patients) {
         this.patients = patients;
+    }
+
+    public String getPatient(int index){
+        return patients[index];
     }
 
     public String[] getNurses() {

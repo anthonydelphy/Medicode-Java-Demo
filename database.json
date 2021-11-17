@@ -1,16 +1,16 @@
 {
   "doctors": [
     {
+      "patients": [
+        "spencershay2005"
+      ],
+      "nurses": [],
       "firstName": "John",
       "lastName": "Doe",
       "username": "johndoe01011990",
       "password": "password",
       "phone": "123-456-7890",
       "birthday": "01/01/1990",
-      "patients": [
-        "robertsmith03032000"
-      ],
-      "nurses": [],
       "messages": [
         {
           "sender": "spencershay2005",
@@ -23,16 +23,16 @@
   ],
   "nurses": [
     {
-      "firstName": "Jane",
-      "lastName": "William",
-      "username": "janewilliam2000",
-      "phone": "123-456-7890",
-      "password": "password",
-      "birthday": "03/01/2000",
       "patients": [
         "robertsmith03032000"
       ],
       "doctor": "johndoe01011990",
+      "firstName": "Jane",
+      "lastName": "William",
+      "username": "janewilliam2000",
+      "password": "password",
+      "phone": "123-456-7890",
+      "birthday": "03/01/2000",
       "messages": [
         {
           "sender": "spencershay2005",
@@ -69,20 +69,20 @@
   ],
   "patients": [
     {
+      "doctor": "johndoe01011990",
+      "prescriptions": [
+        {
+          "prescName": "deeznuts",
+          "expDate": "4/20",
+          "quantity": 69
+        }
+      ],
       "firstName": "Spencer",
       "lastName": "Shay",
       "username": "spencershay2005",
       "password": "password",
       "phone": "123-456-7890",
-      "birthday": "11/20/2005",
-      "doctor": "johndoe01011990",
-      "prescriptions": [
-        {
-          "prescName": "Ibuprofen 500 mg",
-          "expDate": "05/01/2050",
-          "quantity": 2
-        }
-      ]
+      "birthday": "11/20/2005"
     }
   ],
   "appointments": [

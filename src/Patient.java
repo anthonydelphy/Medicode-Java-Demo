@@ -1,20 +1,20 @@
 import java.util.List;
 
-public class Patient extends person{
+public class Patient extends Person{
 
     private String doctor;
-    public List<Precription> prescriptions;
+    public List<Prescription> prescriptions;
 
-    public List<Precription> getPrescriptions() {
+    public List<Prescription> getPrescriptions() {
         return prescriptions;
     }
 
     //Returns full list of prescriptions.
-    public List<Precription> getPrescriptionList() {
+    public List<Prescription> getPrescriptionList() {
         return prescriptions;
     }
 
-    public void setPrescriptions(List<Precription> prescriptions) {
+    public void setPrescriptions(List<Prescription> prescriptions) {
         this.prescriptions = prescriptions;
     }
 

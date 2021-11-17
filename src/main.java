@@ -176,6 +176,7 @@ public class main{
 
     public static void logInDoctor(){
         int flag = 0;
+        int index = -1;
         while (flag == 0) {
 
             System.out.println("Username:");
@@ -184,11 +185,12 @@ public class main{
             System.out.println("Password:");
             String password = scanner.next().toLowerCase(Locale.ROOT);
 
-            for(int i = 0; i< db.getPatientList().size(); i++){
+            for(int i = 0; i< db.getDoctorsList().size(); i++){
                 if(username.equals(db.getDoctorsList().get(i).getUsername().toLowerCase(Locale.ROOT))
                         && password.equals(db.getDoctorsList().get(i).getPassword())){
                     System.out.println("Log in successful");
                     flag = 1;
+                    index = i;
                 }
             }
 
@@ -196,11 +198,12 @@ public class main{
                 System.out.println("This is not a correct username/password combination.\nPlease try again.");
             }
             else if (flag==1){//Load Doctor home page
-
+                doctorHomepage(index);
             }
         }
     }
 
+    //PATIENT METHODS
     public static void patientHomePage(int index){
         int flag = 0;
         while(flag == 0) {
@@ -296,6 +299,124 @@ public class main{
 
 
     }
+
+    //DOCTOR METHODS
+    public static void doctorHomepage(int doctorIndex){
+        int flag = 0;
+        while(flag == 0) {
+            System.out.println("What would you like to do?\n" +
+                    "1. View Upcoming Visits\n" +
+                    "2. View Past Visits\n" +
+                    "3. Give a patient a prescription\n" +
+                    "4. View Messages\n" +
+                    "5. Send Message\n" +
+                    "6. View Your Nurses\n" +
+                    "7. View Your Profile\n" +
+                    "8. Add an appointment\n" +
+                    "0. Log Out\n");
+
+            int menuInput = intScanner.nextInt();
+            switch (menuInput) {
+                case 0: //Log Out
+                    flag = 1;
+                    logInMenu();
+                    break;
+                case 1:
+                    //View Upcoming Visits
+                    for (int i = 0; i < db.getAppointments().size(); i++)
+                        //Goes through all appointments and prints the one the patient is in.
+                        if(db.getDoctorsList().get(doctorIndex).getUsername().equals(db.getAppointments().get(i).getDoctorUsername()) && db.getAppointments().get(i).getUpcoming())
+                            System.out.println(db.getAppointments().get(i).upcomingAppointmentToString());
+                    break;
+                case 2: //View Past Visits
+                    for (int i = 0; i < db.getAppointments().size(); i++)
+                        if(db.getDoctorsList().get(doctorIndex).getUsername().equals(db.getAppointments().get(i).getDoctorUsername()) && !db.getAppointments().get(i).getUpcoming())
+                            System.out.println(db.getAppointments().get(i).pastAppointmentToString());
+                    break;
+                case 3://Give a patient a prescription
+
+                    int prescriptionFlag = 0;
+                    int index = -1; //index of the patient if found
+                    System.out.println("What patient would you like to give a prescription?\n");
+                    for(int i = 0; i < db.getDoctorsList().get(doctorIndex).getPatients().length; i++)
+                        System.out.println(db.getDoctorsList().get(doctorIndex).getPatient(i) + "\n");
+
+                    String patient = scanner.next();
+
+                    //check if valid patient
+                    for(int i = 0; i < db.getDoctorsList().get(doctorIndex).getPatients().length; i++)
+                       if(db.getDoctorsList().get(doctorIndex).getPatient(i).equals(patient)) {
+                           prescriptionFlag = 1; //VALID PATIENT
+                           index = i;
+                       }
+
+
+                    if(prescriptionFlag == 1)
+                        addPrescription(index);
+                    else
+                        System.out.println("This was not a correct patient");
+
+                    break;
+                case 4://View Messages
+                    if(db.getDoctorsList().get(doctorIndex).getMessages().isEmpty())
+                        System.out.println("Empty Inbox\n");
+                    else
+                        for (int i = 0; i < db.getDoctorsList().get(doctorIndex).getMessages().size(); i++)
+                            System.out.println(db.getDoctorsList().get(doctorIndex).getMessages().get(i).toString());
+                    break;
+                case 5: //Send a message
+                    sendMessage(db.getDoctorsList().get(doctorIndex).getUsername());
+                    break;
+                case 6://View your nurses
+                    String[] temp = db.getDoctorsList().get(doctorIndex).getNurses();
+                    for(int i = 0; i < db.getDoctorsList().get(doctorIndex).getNurses().length; i++)
+                        System.out.println(temp[i]);
+                    break;
+                case 7://View Profile
+                    System.out.println(db.getDoctorsList().get(doctorIndex).toString());
+                    break;
+                case 8: //add an appointment
+                    doctorAddAppointment(doctorIndex);
+                    updateJSON();
+                    break;
+            }
+        }
+    }
+
+    public static void doctorAddAppointment(int doctorIndex){
+        
+    }
+
+    public static void addPrescription(int patientIndex){
+
+        System.out.println("What is the name of the prescription?");
+        String prescriptionName = scanner.next();
+        System.out.println(prescriptionName);
+
+
+        System.out.println("What is the quantity of prescription?");
+        int quantity = intScanner.nextInt();
+        System.out.println("What is the expiration date of this prescription?");
+
+        String expiration = scanner.next();
+        System.out.println(expiration);
+
+        Prescription newPresc = new Prescription(prescriptionName, expiration, quantity);
+
+        System.out.println(newPresc.toString());
+
+        List<Prescription> temp = db.getPatientList().get(patientIndex).getPrescriptionList();
+        temp.add(newPresc);
+
+        db.getPatientList().get(patientIndex).setPrescriptions(temp);
+
+        System.out.println("Prescription added!");
+        updateJSON();
+
+
+
+    }
+
     public static void sendMessage(String senderUsername){
         int flag = 0;
         int type = -1; //-1 = undecided, 0 = patient, 1 = nurse, 2 = doctor
