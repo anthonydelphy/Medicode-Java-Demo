@@ -77,6 +77,20 @@
       "password": "password",
       "phone": "123-456-7890",
       "birthday": "11/20/2005"
+    },
+    {
+      "firstName": "Anthony",
+      "lastName": "Delphy",
+      "username": "AnthonyDelphy01012001",
+      "password": "password",
+      "birthday": "01/01/2001"
+    },
+    {
+      "firstName": "Diego",
+      "lastName": "Escalante",
+      "username": "DiegoEscalante010101",
+      "password": "diego",
+      "birthday": "01/01/01"
     }
   ],
   "appointments": [
