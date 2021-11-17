@@ -3,7 +3,6 @@ public class Precription {
     private String expDate;
     private int quantity;
 
-    @Override
     public String toString() {
         return "Precription{" +
                 "precriptionName='" + prescName + '\'' +

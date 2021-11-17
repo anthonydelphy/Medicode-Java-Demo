@@ -82,25 +82,111 @@
           "expDate": "05/01/2050",
           "quantity": 2
         }
-      ],
-      "pastAppointments": [
-        {
-          "weight": 150,
-          "height": "5,7",
-          "temp": 97.8,
-          "bloodPressure": "120/80",
-          "allergies": "None",
-          "healthConcerns": "Ankle hurts",
-          "date": "11/01/2020",
-          "time": "12:00"
-        }
-      ],
-      "appointments": [
-        {
-          "date": "11/20/2020",
-          "time": "12:00"
-        }
       ]
+    }
+  ],
+  "appointments": [
+    {
+      "date": "11/25/2021",
+      "time": "12:00",
+      "patientUsername": "spencershay2005",
+      "doctorUsername": "johndoe01011990",
+      "temperature": 0.0,
+      "upcoming": true
+    },
+    {
+      "date": "11/01/2021",
+      "time": "12:00",
+      "patientUsername": "spencershay2005",
+      "doctorUsername": "johndoe01011990",
+      "concerns": "ankle hurts",
+      "bloodPressure": "120/80",
+      "temperature": 97.8,
+      "height": "5,7",
+      "allergies": "peanuts",
+      "upcoming": false
+    },
+    {
+      "date": "12:30",
+      "time": "12:30",
+      "patientUsername": "spencershay2005",
+      "doctorUsername": "johndoe01011990",
+      "temperature": 0.0,
+      "upcoming": true
+    },
+    {
+      "date": "12/20/2021",
+      "time": "1:00",
+      "patientUsername": "spencershay2005",
+      "doctorUsername": "johndoe01011990",
+      "temperature": 0.0,
+      "upcoming": true
+    },
+    {
+      "date": "12/01/2021",
+      "time": "12:00",
+      "patientUsername": "spencershay2005",
+      "doctorUsername": "johndoe01011990",
+      "temperature": 0.0,
+      "upcoming": true
+    },
+    {
+      "date": "12/02",
+      "time": "12:00",
+      "patientUsername": "spencershay2005",
+      "doctorUsername": "johndoe01011990",
+      "temperature": 0.0,
+      "upcoming": true
+    },
+    {
+      "date": "11/16/2021",
+      "time": "12:00",
+      "patientUsername": "spencershay2005",
+      "doctorUsername": "johndoe01011990",
+      "temperature": 0.0,
+      "upcoming": true
+    },
+    {
+      "date": "12/02/2021",
+      "time": "12:00",
+      "patientUsername": "spencershay2005",
+      "doctorUsername": "johndoe01011990",
+      "temperature": 0.0,
+      "upcoming": true
+    },
+    {
+      "date": "12/20",
+      "time": "12:00",
+      "patientUsername": "spencershay2005",
+      "doctorUsername": "johndoe01011990",
+      "temperature": 0.0,
+      "upcoming": true
+    },
+    {
+      "date": "12/20",
+      "time": "12:00",
+      "patientUsername": "spencershay2005",
+      "doctorUsername": "johndoe01011990",
+      "temperature": 0.0,
+      "upcoming": true
+    },
+    {
+      "date": "12/20/2021",
+      "time": "11:00",
+      "patientUsername": "spencershay2005",
+      "doctorUsername": "johndoe01011990",
+      "concerns": "now",
+      "temperature": 0.0,
+      "upcoming": true
+    },
+    {
+      "date": "12/20",
+      "time": "4",
+      "patientUsername": "spencershay2005",
+      "doctorUsername": "johndoe01011990",
+      "concern": "testing 1 2 3 ",
+      "temperature": 0.0,
+      "upcoming": true
     }
   ]
 }

@@ -4,7 +4,6 @@ public class Message {
     private String subject;
     private String message;
 
-    @Override
     public String toString() {
         return "Message{" +
                 "sender='" + sender + '\'' +

@@ -12,11 +12,13 @@ public class main{
 
     private static Database db;
     private static Scanner scanner;
+    private static Scanner intScanner;
 
     public static void main(String[] args){
         db = new Database();
         String content = "";
         scanner = new Scanner(System.in);
+        intScanner = new Scanner(System.in);
         try {
             content = readFile("database.json", StandardCharsets.UTF_8);
         }
@@ -27,6 +29,7 @@ public class main{
         logInMenu();
 
         scanner.close();
+        intScanner.close();
     }
 
     public static void logInMenu()
@@ -37,7 +40,7 @@ public class main{
         System.out.println("2. Nurse");
         System.out.println("3. Doctor");
 
-        int typeOfAccount = scanner.nextInt();
+        int typeOfAccount = intScanner.nextInt();
 
         switch(typeOfAccount) {
             case 1: //PATIENT
@@ -207,24 +210,28 @@ public class main{
                     "3. View Prescriptions\n" +
                     "4. View Messages\n" +
                     "5. Send Message\n" +
-                    "5. View Your Doctor\n" +
-                    "6. View Your Profile\n" +
+                    "6. View Your Doctor\n" +
+                    "7. View Your Profile\n" +
+                    "8. Add an appointment\n" +
                     "0. Log Out\n");
 
-
-            int menuInput = scanner.nextInt();
+            int menuInput = intScanner.nextInt();
             switch (menuInput) {
                 case 0: //Log Out
                     flag = 1;
                     logInMenu();
                     break;
-                case 1: //View Upcoming Visits
-                    for (int i = 0; i < db.getPatientList().get(index).getAppointments().size(); i++)
-                        System.out.println(db.getPatientList().get(index).getAppointments().get(i).upcomingAppointmentToString());
+                case 1:
+                    //View Upcoming Visits
+                    for (int i = 0; i < db.getAppointments().size(); i++)
+                        //Goes through all appointments and prints the one the patient is in.
+                        if(db.getPatientList().get(index).getUsername().equals(db.getAppointments().get(i).getPatientUsername()) && db.getAppointments().get(i).getUpcoming())
+                            System.out.println(db.getAppointments().get(i).upcomingAppointmentToString());
                     break;
                 case 2: //View Past Visits
-                    for (int i = 0; i < db.getPatientList().get(index).getPastAppointments().size(); i++)
-                        System.out.println(db.getPatientList().get(index).getPastAppointments().get(i).toString());
+                    for (int i = 0; i < db.getAppointments().size(); i++)
+                        if(db.getPatientList().get(index).getUsername().equals(db.getAppointments().get(i).getPatientUsername()) && !db.getAppointments().get(i).getUpcoming())
+                            System.out.println(db.getAppointments().get(i).pastAppointmentToString());
                     break;
                 case 3://View Prescriptions
                     for (int i = 0; i < db.getPatientList().get(index).getPrescriptionList().size(); i++)
@@ -249,7 +256,10 @@ public class main{
                 case 7://View Profile
                     System.out.println(db.getPatientList().get(index).toString());
                     break;
-
+                case 8: //add an appointment
+                    patientAddAppointment(index);
+                    updateJSON();
+                    break;
             }
         }
 
@@ -258,6 +268,34 @@ public class main{
 
     }
 
+    public static void patientAddAppointment(int patientIndex){
+
+        //Collect information regarding the appointment
+        System.out.println("When will the appointment be?");
+        String date = scanner.next();
+        System.out.println("What time?");
+        String time = scanner.next();
+        scanner.nextLine();
+        System.out.println("What is the reason for this appointment?");
+        String concern = scanner.nextLine();
+
+        //Create new appointment object.
+        Appointments newAppointment = new Appointments();
+        newAppointment.setUpcoming(true);
+        newAppointment.setDate(date);
+        newAppointment.setTime(time);
+        newAppointment.setPatientUsername(db.getPatientList().get(patientIndex).getUsername());
+        newAppointment.setDoctorUsername(db.getPatientList().get(patientIndex).getDoctor());
+        newAppointment.setConcerns(concern);
+
+        //Add appointment to appointments list and update JSON
+
+        List<Appointments> temp = db.getAppointments();
+        temp.add(newAppointment);
+        db.setAppointments(temp);
+
+
+    }
     public static void sendMessage(String senderUsername){
         int flag = 0;
         int type = -1; //-1 = undecided, 0 = patient, 1 = nurse, 2 = doctor

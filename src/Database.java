@@ -6,6 +6,15 @@ public class Database{
         private List<Doctor> doctors;
         private List<Nurse> nurses;
         private List<Patient> patients;
+        private List<Appointments> appointments;
+
+        public List<Appointments> getAppointments() {
+                return appointments;
+        }
+
+        public void setAppointments(List<Appointments> appointments) {
+                this.appointments = appointments;
+        }
 
         //Add a new patient account
         public void addPatient(Patient patient){

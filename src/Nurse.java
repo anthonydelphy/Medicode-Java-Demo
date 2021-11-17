@@ -71,7 +71,6 @@ public class Nurse{
         return doctor;
     }
 
-    @Override
     public String toString() {
         return "Nurse{" +
                 "firstName='" + firstName + '\'' +

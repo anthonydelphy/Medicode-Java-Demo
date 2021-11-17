@@ -75,7 +75,6 @@ public class Doctor{
         this.nurses = nurses;
     }
 
-    @Override
     public String toString() {
         return "Doctor{" +
                 "firstName='" + firstName + '\'' +

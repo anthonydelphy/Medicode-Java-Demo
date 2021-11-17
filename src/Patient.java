@@ -8,9 +8,7 @@ public class Patient {
     private String phone;
     private String birthday;
     private String doctor;
-    private List<Precription> prescriptions;
-    private List<PastAppointment> pastAppointments;
-    private List<Appointments> appointments;
+    public List<Precription> prescriptions;
     private List<Message> messages;
 
     public List<Message> getMessages() {
@@ -23,23 +21,6 @@ public class Patient {
 
     public List<Precription> getPrescriptions() {
         return prescriptions;
-    }
-
-    public List<PastAppointment> getPastAppointments() {
-        return pastAppointments;
-    }
-
-
-    public void setPastAppointments(List<PastAppointment> pastAppointments) {
-        this.pastAppointments = pastAppointments;
-    }
-
-    public List<Appointments> getAppointments() {
-        return appointments;
-    }
-
-    public void setAppointments(List<Appointments> appointments) {
-        this.appointments = appointments;
     }
 
     //Returns individual prescription from prescription list
