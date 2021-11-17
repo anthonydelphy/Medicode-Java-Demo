@@ -235,7 +235,7 @@ public class main{
                     break;
                 case 3://View Prescriptions
                     for (int i = 0; i < db.getPatientList().get(index).getPrescriptionList().size(); i++)
-                        System.out.println(db.getPatientList().get(index).getPrescription(i).toString());
+                        System.out.println(db.getPatientList().get(index).getPrescriptions().get(i).toString());
                     break;
                 case 4://View Messages
                     for(int i =0; i < db.getPatientList().get(index).getMessages().size(); i++)
