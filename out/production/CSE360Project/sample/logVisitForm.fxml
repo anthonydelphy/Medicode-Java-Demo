@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text layoutX="177.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logging Vitals">
+         <font>
+            <Font size="39.0" />
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <VBox layoutX="14.0" layoutY="75.0" prefHeight="324.0" prefWidth="218.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date (MM/DD/YYYY)">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+            <TextField fx:id="dateInput" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Temperature (F)">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+            <TextField fx:id="tempInput" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Weight (lb)">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+            <TextField fx:id="weightInput" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Height (ft)">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+            <TextField fx:id="heightInput" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Blood Pressure (mm/Hg)">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+            <TextField fx:id="bpInput" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+         </children>
+      </VBox>
+      <Button fx:id="backButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#previousScene" text="Back" />
+      <VBox layoutX="254.0" layoutY="75.0" prefHeight="304.0" prefWidth="325.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Allergies">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+            <TextArea fx:id="allergiesInput" prefHeight="200.0" prefWidth="200.0" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Concerns">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+            <TextArea fx:id="concernsInput" prefHeight="200.0" prefWidth="200.0" />
+         </children>
+      </VBox>
+      <Button fx:id="logVitalsButton" layoutX="475.0" layoutY="26.0" mnemonicParsing="false" onAction="#logVitals" prefHeight="25.0" prefWidth="103.0" text="Log Vitals" />
+   </children>
+</AnchorPane>
