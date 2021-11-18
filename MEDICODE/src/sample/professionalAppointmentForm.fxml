@@ -8,19 +8,19 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="439.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller ="sample.professionalAppointmentFormController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text layoutX="47.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Appointment Form">
+      <Text layoutX="128.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Appointment Form">
          <font>
             <Font size="41.0" />
          </font>
       </Text>
-      <VBox fx:id="firstName" layoutX="39.0" layoutY="58.0" prefHeight="270.0" prefWidth="359.0">
+      <VBox fx:id="firstName" layoutX="120.0" layoutY="73.0" prefHeight="275.0" prefWidth="359.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Username" />
-            <TextField fx:id="patientUsername" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Doctor Username" />
-            <TextField fx:id="doctorUs" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="First Name" />
+            <TextField fx:id="firstNameField" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name" />
+            <TextField fx:id="lastNameField" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date " />
             <TextField fx:id="dateField" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Time" />
@@ -30,7 +30,5 @@
             <Button fx:id="makeAppointmentButton" mnemonicParsing="false" onAction="#makeAppointment" prefHeight="25.0" prefWidth="393.0" text="Make Appointment" />
          </children>
       </VBox>
-      <Text fx:id="completeFields" layoutX="59.0" layoutY="351.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please fill out all lines" visible="false" wrappingWidth="222.1086883544922" />
-      <Text fx:id="created" layoutX="132.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Appointment Created" visible="false" />
    </children>
 </AnchorPane>
