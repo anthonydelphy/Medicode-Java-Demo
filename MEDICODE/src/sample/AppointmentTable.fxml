@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <TextField editable="false" text="Welcome Patient:" BorderPane.alignment="CENTER" />
+   </top>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="14.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Upcoming Appointments:">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <Button fx:id="backButton" layoutX="14.0" layoutY="8.0" mnemonicParsing="false" text="Back" />
+            <TableView fx:id="upcomingAppoinments" layoutX="14.0" layoutY="69.0" prefHeight="119.0" prefWidth="568.0">
+              <columns>
+                <TableColumn prefWidth="174.0" text="Visit Date" />
+                <TableColumn prefWidth="83.0" text="Time" />
+              </columns>
+            </TableView>
+            <Text layoutX="14.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Past Appointments:">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <TableView fx:id="upcomingAppoinments1" layoutX="16.0" layoutY="227.0" prefHeight="119.0" prefWidth="568.0">
+               <columns>
+                  <TableColumn prefWidth="174.0" text="Visit Date" fx:id="upcomingDate" />
+                  <TableColumn prefWidth="83.0" text="Time" fx:id="upcomingTime" />
+               </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

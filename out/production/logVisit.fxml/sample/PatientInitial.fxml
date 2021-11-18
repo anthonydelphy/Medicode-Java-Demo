@@ -39,12 +39,12 @@
 
 <BorderPane fx:id="displayBorder" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.PatientInitialController">
    <top>
-      <TextField fx:id="doctorNameField" prefHeight="25.0" prefWidth="543.0" text="Welcome Patient:" BorderPane.alignment="CENTER" />
+      <TextField fx:id="doctorNameField" editable="false" prefHeight="25.0" prefWidth="543.0" text="Welcome Patient:" BorderPane.alignment="CENTER" />
    </top>
    <left>
       <VBox prefHeight="375.0" prefWidth="124.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="doctorAppointmentsButton" mnemonicParsing="false" onAction="#loadAppointments" prefHeight="37.0" prefWidth="213.0" text="View Appointments" />
+            <Button fx:id="viewAppointmentsButton" mnemonicParsing="false" onAction="#loadAppointments" prefHeight="37.0" prefWidth="213.0" text="View Appointments" />
             <Button fx:id="patientViewNurse" mnemonicParsing="false" onAction="#loadNurses" prefHeight="48.0" prefWidth="124.0" text="Make Appointment" />
             <Button fx:id="doctorViewNurses" mnemonicParsing="false" onAction="#loadNurses" prefHeight="48.0" prefWidth="124.0" text="Your Nurse" />
             <Button fx:id="patientChangeDoctor" mnemonicParsing="false" onAction="#changeDoctor" prefHeight="48.0" prefWidth="124.0" text="Change Doctor" />

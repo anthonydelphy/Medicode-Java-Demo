@@ -54,6 +54,7 @@
             <TextField fx:id="loginPassword" />
             <Button fx:id="loginButton" mnemonicParsing="false" onAction="#loginButtonAction" text="Log In " />
             <Button fx:id="createAccountButton" mnemonicParsing="false" onAction="#createAccountButtonAction" text="Create Account" />
+            <Text fx:id="loginFailText" strokeType="OUTSIDE" strokeWidth="0.0" fill = "red" text = "" />
          </children>
       </VBox>
    </children>

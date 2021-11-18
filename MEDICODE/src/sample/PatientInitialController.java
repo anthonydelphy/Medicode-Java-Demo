@@ -72,7 +72,7 @@ public class PatientInitialController {
 
     @FXML
     void loadAppointments(ActionEvent event) throws IOException {
-        loadUI("ApointmentView");
+        ChangeSceneClass.changeScene(event, "AppointmentTable.fxml");
 
     }
 
