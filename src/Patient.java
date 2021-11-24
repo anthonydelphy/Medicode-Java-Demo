@@ -1,67 +1,22 @@
-import javax.print.attribute.standard.PresentationDirection;
+
 import java.util.List;
 
-public class Patient {
-    private String firstName;
-    private String lastName;
-    private String username;
-    private String password;
-    private String birthday;
-    private String doctor;
-    public List<Precription> prescriptions;
+public class Patient extends Person{
 
-    //Returns individual prescription from prescription list
-    public Precription getPrescription(int index) {
-        return prescriptions.get(index);
+    private String doctor;
+    public List<Prescription> prescriptionList;
+
+    public List<Prescription> getPrescriptions() {
+        return prescriptionList;
     }
 
     //Returns full list of prescriptions.
-    public List<Precription> getPrescriptionList() {
-        return prescriptions;
+    public List<Prescription> getPrescriptionList() {
+        return prescriptionList;
     }
 
-    public void setPrescriptions(List<Precription> prescriptions) {
-        this.prescriptions = prescriptions;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
+    public void setPrescriptions(List<Prescription> prescriptions) {
+        this.prescriptionList = prescriptions;
     }
 
     public String getDoctor() {
@@ -71,4 +26,5 @@ public class Patient {
     public void setDoctor(String doctor) {
         this.doctor = doctor;
     }
+
 }

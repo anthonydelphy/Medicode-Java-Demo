@@ -1,58 +1,229 @@
 {
   "doctors": [
     {
+      "patients": [
+        "spencershay2005"
+      ],
+      "nurses": [],
       "firstName": "John",
       "lastName": "Doe",
       "username": "johndoe01011990",
       "password": "password",
+      "phone": "123-456-7890",
       "birthday": "01/01/1990",
-      "patients": [
-        "robertsmith03032000"
-      ],
-      "nurses": []
+      "messages": [
+        {
+          "sender": "spencershay2005",
+          "recipient": "johndoe01011990",
+          "subject": "test",
+          "message": "testing"
+        },
+        {
+          "sender": "spencershay2005",
+          "recipient": "johndoe01011990",
+          "subject": "go",
+          "message": "fuck"
+        },
+        {
+          "sender": "spencershay2005",
+          "recipient": "johndoe01011990",
+          "subject": "",
+          "message": "hello?"
+        },
+        {
+          "sender": "spencershay2005",
+          "recipient": "johndoe01011990",
+          "subject": "",
+          "message": "fuck mylife"
+        }
+      ]
     }
   ],
   "nurses": [
     {
+      "patients": [
+        "spencershay2005"
+      ],
+      "doctor": "johndoe01011990",
       "firstName": "Jane",
       "lastName": "William",
-      "username": "janewilliam200-",
+      "username": "janewilliam2000",
       "password": "password",
+      "phone": "123-456-7890",
       "birthday": "03/01/2000",
-      "patients": [
-        "robertsmith03032000"
-      ],
-      "doctor": "johndoe01011990"
+      "messages": [
+        {
+          "sender": "spencershay2005",
+          "recipient": "janewilliam2000",
+          "subject": "test",
+          "message": "testing"
+        },
+        {
+          "sender": "spencershay2005",
+          "recipient": "janewilliam2000",
+          "subject": "testing1",
+          "message": "testing2"
+        },
+        {
+          "sender": "spencershay2005",
+          "recipient": "janewilliam2000",
+          "subject": "this",
+          "message": "should"
+        },
+        {
+          "sender": "spencershay2005",
+          "recipient": "janewilliam2000",
+          "subject": "test",
+          "message": "this"
+        },
+        {
+          "sender": "spencershay2005",
+          "recipient": "janewilliam2000",
+          "subject": "testing",
+          "message": "again"
+        }
+      ]
     }
   ],
   "patients": [
     {
+      "doctor": "johndoe01011990",
+      "prescriptionList": [
+        {
+          "prescName": "deeznuts",
+          "expDate": "4/20",
+          "quantity": 69
+        },
+        {
+          "prescName": "aaa",
+          "expDate": "3/19",
+          "quantity": 25
+        }
+      ],
       "firstName": "Spencer",
       "lastName": "Shay",
       "username": "spencershay2005",
       "password": "password",
+      "phone": "123-456-7890",
       "birthday": "11/20/2005",
-      "doctor": "johndoe01011990",
-      "prescriptions": [
+      "messages": [
         {
-          "prescName": "Ibuprofen 500 mg",
-          "expDate": "05/01/2050",
-          "quantity": 2
+          "sender": "janewilliam2000",
+          "recipient": "spencershay2005",
+          "subject": "test",
+          "message": "testing"
+        },
+        {
+          "sender": "janewilliam2000",
+          "recipient": "spencershay2005",
+          "subject": "peepeepoopoo",
+          "message": "osanodiansidnodifnosingoisnroigosigoisnbdfgoinsdifgnoisfdngoifsg"
         }
       ]
+    }
+  ],
+  "appointments": [
+    {
+      "date": "11/01/2021",
+      "time": "12:00",
+      "patientUsername": "spencershay2005",
+      "doctorUsername": "johndoe01011990",
+      "concerns": "ankle hurts",
+      "bloodPressure": "120/80",
+      "temperature": 97.8,
+      "height": "5,7",
+      "allergies": "peanuts",
+      "upcoming": false
     },
     {
-      "firstName": "anthony",
-      "lastName": "delphy",
-      "username": "anthonydelphy05292001",
-      "birthday": "05/29/2001"
+      "date": "11/16/2021",
+      "time": "12:00",
+      "patientUsername": "spencershay2005",
+      "doctorUsername": "johndoe01011990",
+      "temperature": 0.0,
+      "upcoming": true
     },
     {
-      "firstName": "Diego",
-      "lastName": "Escalante",
-      "username": "diegoescalante03241920",
-      "password": "password",
-      "birthday": "03/24/1920"
+      "date": "11/25/2021",
+      "time": "12:00",
+      "patientUsername": "spencershay2005",
+      "doctorUsername": "johndoe01011990",
+      "temperature": 0.0,
+      "upcoming": true
+    },
+    {
+      "date": "12/01/2021",
+      "time": "12:00",
+      "patientUsername": "spencershay2005",
+      "doctorUsername": "johndoe01011990",
+      "temperature": 0.0,
+      "upcoming": true
+    },
+    {
+      "date": "12/02/2021",
+      "time": "12:00",
+      "patientUsername": "spencershay2005",
+      "doctorUsername": "johndoe01011990",
+      "temperature": 0.0,
+      "upcoming": true
+    },
+    {
+      "date": "12/02",
+      "time": "12:00",
+      "patientUsername": "spencershay2005",
+      "doctorUsername": "johndoe01011990",
+      "temperature": 0.0,
+      "upcoming": true
+    },
+    {
+      "date": "12/20/2021",
+      "time": "11:00",
+      "patientUsername": "spencershay2005",
+      "doctorUsername": "johndoe01011990",
+      "concerns": "now",
+      "temperature": 0.0,
+      "upcoming": true
+    },
+    {
+      "date": "12/20/2021",
+      "time": "1:00",
+      "patientUsername": "spencershay2005",
+      "doctorUsername": "johndoe01011990",
+      "temperature": 0.0,
+      "upcoming": true
+    },
+    {
+      "date": "12/20",
+      "time": "12:00",
+      "patientUsername": "spencershay2005",
+      "doctorUsername": "johndoe01011990",
+      "temperature": 0.0,
+      "upcoming": true
+    },
+    {
+      "date": "12/20",
+      "time": "12:00",
+      "patientUsername": "spencershay2005",
+      "doctorUsername": "johndoe01011990",
+      "temperature": 0.0,
+      "upcoming": true
+    },
+    {
+      "date": "12/20",
+      "time": "4",
+      "patientUsername": "spencershay2005",
+      "doctorUsername": "johndoe01011990",
+      "concern": "testing 1 2 3 ",
+      "temperature": 0.0,
+      "upcoming": true
+    },
+    {
+      "date": "12:30",
+      "time": "12:30",
+      "patientUsername": "spencershay2005",
+      "doctorUsername": "johndoe01011990",
+      "temperature": 0.0,
+      "upcoming": true
     }
   ]
 }

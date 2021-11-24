@@ -1,28 +1,34 @@
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
+import java.util.ArrayList;
 
 //This class file store the total amount of doctors. The JSON file will be mapped to this class and fill in
 //as many doctors as needed.
+
+
 public class Database{
         private List<Doctor> doctors;
         private List<Nurse> nurses;
         private List<Patient> patients;
+        private List<Appointments> appointments;
+
+        public transient List<Person> allpeople = new ArrayList<>();
+
+        public List<Appointments> getAppointments() {
+                return appointments;
+        }
+
+        public void setAppointments(List<Appointments> appointments) {
+                this.appointments = appointments;
+        }
 
         //Add a new patient account
         public void addPatient(Patient patient){
                 patients.add(patient);
-        }
-
-        //Getters for specific patients
-        public Patient getPatient(int index) {
-                return patients.get(index);
-        }
-
-        public Nurse getNurse(int index) {
-                return nurses.get(index);
-        }
-
-        public Doctor getDoctor(int index) {
-                return doctors.get(index);
         }
 
         //Getters and setters for full list of doctors, nurses, and patients
@@ -48,5 +54,24 @@ public class Database{
 
         public void setPatientList(List<Patient> patient) {
                 this.patients = patient;
+        }
+
+        public void puteveryoneinallpeople(){
+            for (Doctor d : doctors)
+                allpeople.add(d);
+            for (Nurse n : nurses)
+                allpeople.add(n);
+            for (Patient p : patients)
+                allpeople.add(p);
+        }
+
+        //
+        public void updateJSON(){
+                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                String newJSON = gson.toJson(this);
+
+                try(FileWriter writer = new FileWriter("database.json")){
+                        writer.write(newJSON);
+                } catch(IOException e){ e.printStackTrace();}
         }
 }

@@ -1,0 +1,1 @@
+javac -cp .\dependencies\gson-2.8.9.jar -d .\out --module-path %JAVA_FX_HOME% --add-modules javafx.controls .\src\*.java

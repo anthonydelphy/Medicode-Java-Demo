@@ -1,3 +1,7 @@
-# CSE360Project
+# Build
+Add an enviornment variable called JAVA_FX_HOME which resolves to the lib
+directory in javafx, or replace it in the build.bat. Then run build.bat
 
-This project utilizes the GSON library to parse the jsons.
+# Run
+Add an enviornment variable called JAVA_FX_HOME which resolves to the lib
+directory in javafx, or replace it in the run.bat. Then run run.bat
