@@ -48,12 +48,12 @@ public class Main extends Application{
         return new String(encoded, encoding);
     }
 
-	public static void main(String[] args){
-		launch(args);
-	}
+    public static void main(String[] args){
+        launch(args);
+    }
 
-	@Override
-	public void start(Stage primaryStage) {
+    @Override
+    public void start(Stage primaryStage) {
         Gson gson = new Gson();
 
         String content = "";
@@ -73,13 +73,12 @@ public class Main extends Application{
         Scene primaryScene;
 
 /*******************************************************************************
-*                                                                              *
-*                                                                              *
-*                             Common Elements                                  *
-*                                                                              *
-*                                                                              *
-*******************************************************************************/
-
+ *                                                                              *
+ *                                                                              *
+ *                             Common Elements                                  *
+ *                                                                              *
+ *                                                                              *
+ *******************************************************************************/
         Button logout_btn           = new Button("Log Out");
         Button viewappointments_btn = new Button("View Appointments");
         Button viewmessages_btn     = new Button("View Messages");
@@ -88,15 +87,15 @@ public class Main extends Application{
 
 
 /*******************************************************************************
-*                                                                              *
-*                                                                              *
-*                               Screens                                        *
-*                                                                              *
-*                                                                              *
-*******************************************************************************/
+ *                                                                              *
+ *                                                                              *
+ *                               Screens                                        *
+ *                                                                              *
+ *                                                                              *
+ *******************************************************************************/
         /***********************************
-        *            Login Screen          *
-        ***********************************/
+         *            Login Screen          *
+         ***********************************/
         GridPane logingrid = new GridPane();
         logingrid.setAlignment(Pos.CENTER);
         logingrid.setHgap(10);
@@ -120,11 +119,11 @@ public class Main extends Application{
         logingrid.add(pwBox, 1, 2);
 
         Button login_btn = new Button("Sign in");
-		Button logincreateaccount_btn = new Button("Create account");
+        Button logincreateaccount_btn = new Button("Create account");
         VBox vbBtn = new VBox(10);
         vbBtn.setAlignment(Pos.BOTTOM_RIGHT);
         vbBtn.getChildren().add(login_btn);
-		vbBtn.getChildren().add(logincreateaccount_btn);
+        vbBtn.getChildren().add(logincreateaccount_btn);
         logingrid.add(vbBtn, 1, 4);
 
         Text loginFailText = new Text();
@@ -136,8 +135,8 @@ public class Main extends Application{
         primaryStage.show();
 
         /***********************************
-        *        Create Account Screen     *
-        ***********************************/
+         *        Create Account Screen     *
+         ***********************************/
         GridPane createaccountgrid = new GridPane();
         createaccountgrid.setAlignment(Pos.CENTER);
         createaccountgrid.setHgap(10);
@@ -175,12 +174,12 @@ public class Main extends Application{
         createaccountgrid.add(createaccountcreate_btn, 1, 5);
 
 /*******************************************************************************
-*                                                                              *
-*                                                                              *
-*                            User Screen                                       *
-*                                                                              *
-*                                                                              *
-*******************************************************************************/
+ *                                                                              *
+ *                                                                              *
+ *                            User Screen                                       *
+ *                                                                              *
+ *                                                                              *
+ *******************************************************************************/
         GridPane userviewgrid = new GridPane();
         GridPane usergrid = new GridPane();
         //usergrid.setAlignment(Pos.CENTER);
@@ -190,8 +189,8 @@ public class Main extends Application{
         usergrid.add(userviewgrid, 1, 0);
 
         /***********************************
-        *          Patient Elements        *
-        ***********************************/
+         *          Patient Elements        *
+         ***********************************/
         Button viewprescriptions_btn = new Button("View Prescriptions");
         Button viewdoctor_btn        = new Button("View Doctor");
         Button changedoctor_btn      = new Button("Change Doctor");
@@ -200,8 +199,8 @@ public class Main extends Application{
         pbtnvbox.setPrefWidth(150);
 
         /***********************************
-        *           Doctor Elements        *
-        ***********************************/
+         *           Doctor Elements        *
+         ***********************************/
         Button createpatient_btn   = new Button("Create Patient");
         Button logappointment_btn  = new Button("Log Appointment");
         Button patientsearch_btn   = new Button("Patient Search");
@@ -214,16 +213,16 @@ public class Main extends Application{
 
 
 /*******************************************************************************
-*                                                                              *
-*                                                                              *
-*                          Logged in Screen                                    *
-*                                                                              *
-*                                                                              *
-*******************************************************************************/
+ *                                                                              *
+ *                                                                              *
+ *                          Logged in Screen                                    *
+ *                                                                              *
+ *                                                                              *
+ *******************************************************************************/
 
         /***********************************
-        *    Appointment Table Columns     *
-        ***********************************/
+         *    Appointment Table Columns     *
+         ***********************************/
         TableColumn<Appointments, String> datecol = new TableColumn<>("Date");
         datecol.setCellValueFactory(new PropertyValueFactory<>("date"));
 
@@ -240,8 +239,8 @@ public class Main extends Application{
         patientcol.setCellValueFactory(new PropertyValueFactory<>("patientUsername"));
 
         /***********************************
-        *            Appointments          *
-        ***********************************/
+         *            Appointments          *
+         ***********************************/
         GridPane appointmentgrid = new GridPane();
         appointmentgrid.setAlignment(Pos.CENTER);
         appointmentgrid.setHgap(10);
@@ -261,10 +260,10 @@ public class Main extends Application{
 
         TableColumn<Appointments, String> ptimecol = new TableColumn<>("Time");
         ptimecol.setCellValueFactory(new PropertyValueFactory<>("time"));
-        
+
         TableColumn<Appointments, String> ppatientcol = new TableColumn<>("Patient");
         ppatientcol.setCellValueFactory(new PropertyValueFactory<>("patientUsername"));
-        
+
         pappointments_tv.getColumns().add(pdatecol);
         pappointments_tv.getColumns().add(ptimecol);
         pappointments_tv.getColumns().add(concernscol);
@@ -275,8 +274,8 @@ public class Main extends Application{
         appointmentgrid.add(pappointments_tv                        , 0, 3);
 
         /***********************************
-        *  Previous Appointment Sub Window *
-        ***********************************/
+         *  Previous Appointment Sub Window *
+         ***********************************/
         GridPane subappointmentgrid = new GridPane();
         subappointmentgrid.setAlignment(Pos.CENTER);
         subappointmentgrid.setHgap(10);
@@ -315,8 +314,8 @@ public class Main extends Application{
         subappointmentwindow.setScene(new Scene(subappointmentgrid));
 
         /***********************************
-        *         Log Appointments         *
-        ***********************************/
+         *         Log Appointments         *
+         ***********************************/
         GridPane logappointmentgrid = new GridPane();
         logappointmentgrid.setAlignment(Pos.CENTER);
         logappointmentgrid.setHgap(10);
@@ -324,7 +323,7 @@ public class Main extends Application{
         logappointmentgrid.setPadding(new Insets(25, 25, 25, 25));
 
         TableView<Appointments> loguappointments_tv = new TableView<>();
-        
+
         TableColumn<Appointments, String> ldatecol = new TableColumn<>("Date");
         ldatecol.setCellValueFactory(new PropertyValueFactory<>("date"));
 
@@ -345,8 +344,8 @@ public class Main extends Application{
         logappointmentgrid.add(loguappointments_tv, 0, 0);
 
         /***********************************
-        *         Make Appointments        *
-        ***********************************/
+         *         Make Appointments        *
+         ***********************************/
         GridPane makeappointmentgrid = new GridPane();
         makeappointmentgrid.setAlignment(Pos.CENTER);
         makeappointmentgrid.setHgap(10);
@@ -371,8 +370,8 @@ public class Main extends Application{
         makeappointmentgrid.add(addappointment_btn             , 1, 4);
 
         /***********************************
-        *        View Prescriptions        *
-        ***********************************/
+         *        View Prescriptions        *
+         ***********************************/
         GridPane vprescriptiongrid = new GridPane();
         vprescriptiongrid.setAlignment(Pos.CENTER);
         vprescriptiongrid.setHgap(10);
@@ -398,8 +397,8 @@ public class Main extends Application{
         vprescriptiongrid.add(prescriptions_tv                , 0, 1);
 
         /***********************************
-        *        Prescribe Medication      *
-        ***********************************/
+         *        Prescribe Medication      *
+         ***********************************/
         GridPane dprescribegrid = new GridPane();
         dprescribegrid.setAlignment(Pos.CENTER);
         dprescribegrid.setHgap(10);
@@ -425,8 +424,8 @@ public class Main extends Application{
 
 
         /***********************************
-        *             View Doctor          *
-        ***********************************/
+         *             View Doctor          *
+         ***********************************/
         GridPane vdoctorgrid = new GridPane();
         vdoctorgrid.setAlignment(Pos.CENTER);
         vdoctorgrid.setHgap(10);
@@ -442,8 +441,8 @@ public class Main extends Application{
         vdoctorgrid.add(docphone   , 0, 2);
 
         /***********************************
-        *            View Profile          *
-        ***********************************/
+         *            View Profile          *
+         ***********************************/
         GridPane vprofilegrid = new GridPane();
         vprofilegrid.setAlignment(Pos.CENTER);
         vprofilegrid.setHgap(10);
@@ -459,8 +458,8 @@ public class Main extends Application{
         vprofilegrid.add(phone_l   , 0, 2);
 
         /***********************************
-        *           Change Doctor          *
-        ***********************************/
+         *           Change Doctor          *
+         ***********************************/
         GridPane changedocgrid = new GridPane();
         changedocgrid.setAlignment(Pos.CENTER);
         changedocgrid.setHgap(10);
@@ -489,8 +488,8 @@ public class Main extends Application{
         changedocgrid.add(docs_tv              , 0, 1);
 
         /***********************************
-        *             View Nurses          *
-        ***********************************/
+         *             View Nurses          *
+         ***********************************/
         GridPane vnursegrid = new GridPane();
         vnursegrid.setAlignment(Pos.CENTER);
         vnursegrid.setHgap(10);
@@ -522,8 +521,8 @@ public class Main extends Application{
         vnursegrid.add(nurses_tv           , 0, 1);
 
         /***********************************
-        *            View Patients         *
-        ***********************************/
+         *            View Patients         *
+         ***********************************/
         GridPane vpatientgrid = new GridPane();
         vpatientgrid.setAlignment(Pos.CENTER);
         vpatientgrid.setHgap(10);
@@ -555,8 +554,8 @@ public class Main extends Application{
         vpatientgrid.add(patients_tv           , 0, 1);
 
         /***********************************
-        *              Messages            *
-        ***********************************/
+         *              Messages            *
+         ***********************************/
         GridPane messagegrid = new GridPane();
         messagegrid.setAlignment(Pos.CENTER);
         messagegrid.setHgap(10);
@@ -585,8 +584,8 @@ public class Main extends Application{
         messagegrid.add(messages_tv                , 0, 1);
 
         /***********************************
-        *        Messages Sub window       *
-        ***********************************/
+         *        Messages Sub window       *
+         ***********************************/
         GridPane submessagegrid = new GridPane();
         submessagegrid.setAlignment(Pos.CENTER);
         submessagegrid.setHgap(10);
@@ -610,12 +609,12 @@ public class Main extends Application{
 
 
 /*******************************************************************************
-*                                                                              *
-*                                                                              *
-*                               Event Listeners                                *
-*                                                                              *
-*                                                                              *
-*******************************************************************************/
+ *                                                                              *
+ *                                                                              *
+ *                               Event Listeners                                *
+ *                                                                              *
+ *                                                                              *
+ *******************************************************************************/
 
         logout_btn.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -647,30 +646,50 @@ public class Main extends Application{
                     pwBox.setText("");
 
                     if (p instanceof Patient){
+                        usergrid.getChildren().remove(dbtnvbox);
                         usergrid.add(pbtnvbox, 0, 0);
 
+                        pbtnvbox.getChildren().clear();
+                        dbtnvbox.getChildren().clear();
                         pbtnvbox.getChildren().addAll(
-                        logout_btn, viewappointments_btn, viewprescriptions_btn,
-                        viewdoctor_btn, changedoctor_btn, viewnurses_btn,
-                        viewmessages_btn, viewprofile_btn
+                                logout_btn, viewappointments_btn, viewprescriptions_btn,
+                                viewdoctor_btn, changedoctor_btn, viewnurses_btn,
+                                viewmessages_btn, viewprofile_btn
                         );
 
                         for (Node b : pbtnvbox.getChildren())
                             ((Button) b).prefWidthProperty().bind(pbtnvbox.widthProperty());
 
+                        uappointments_tv.getColumns().remove(patientcol);
+                        pappointments_tv.getColumns().remove(ppatientcol);
+
                     }
 
                     else if (p instanceof Doctor){
+                        usergrid.getChildren().remove(pbtnvbox);
                         usergrid.add(dbtnvbox, 0, 0);
+
+                        pbtnvbox.getChildren().clear();
+                        dbtnvbox.getChildren().clear();
                         dbtnvbox.getChildren().addAll(
-                        logout_btn, viewappointments_btn, createpatient_btn,
-                        logappointment_btn, patientsearch_btn, viewnurses_btn,
-                        viewpatients_btn, prescribemed_btn, makeappointment_btn,
-                        viewmessages_btn, viewprofile_btn
+                                logout_btn, viewappointments_btn, createpatient_btn,
+                                logappointment_btn, patientsearch_btn, viewnurses_btn,
+                                viewpatients_btn, prescribemed_btn, makeappointment_btn,
+                                viewmessages_btn, viewprofile_btn
                         );
 
                         for (Node b : dbtnvbox.getChildren())
                             ((Button) b).prefWidthProperty().bind(dbtnvbox.widthProperty());
+
+                        uappointments_tv.getColumns().remove(concerncol);
+                        pappointments_tv.getColumns().remove(concernscol);
+                        uappointments_tv.getColumns().remove(patientcol);
+                        pappointments_tv.getColumns().remove(ppatientcol);
+
+                        uappointments_tv.getColumns().add(patientcol);
+                        pappointments_tv.getColumns().add(ppatientcol);
+                        uappointments_tv.getColumns().add(concerncol);
+                        pappointments_tv.getColumns().add(concernscol);
                     }
 
                     return;
@@ -692,10 +711,10 @@ public class Main extends Application{
             @Override
             public void handle(ActionEvent e) {
                 if (
-                    firstnametf.getText().length()  == 0 ||
-                    lastnametf.getText().length()   == 0 ||
-                    dobtf.getText().length()        == 0 ||
-                    passwordtf.getText().length()   == 0
+                        firstnametf.getText().length()  == 0 ||
+                                lastnametf.getText().length()   == 0 ||
+                                dobtf.getText().length()        == 0 ||
+                                passwordtf.getText().length()   == 0
                 ){
                     fillallfields.setText("Please fill all fields!");
                     return;
@@ -722,7 +741,7 @@ public class Main extends Application{
 
                 for (Appointments a : db.getAppointments()){
                     if (!(user.getUsername().equals(a.getPatientUsername()) ||
-                          user.getUsername().equals(a.getDoctorUsername())))
+                            user.getUsername().equals(a.getDoctorUsername())))
                         continue;
                     if (a.getUpcoming())
                         upcoming.add(a);
@@ -756,13 +775,13 @@ public class Main extends Application{
                     if (!p.getUsername().equals(dprecuser_tf.getText()))
                         continue;
                     try{
-                            Prescription presc = new Prescription(
+                        Prescription presc = new Prescription(
                                 dprecmeds_tf.getText(), dprecexp_tf.getText(),
                                 Integer.parseInt(dprecqty_tf.getText())
-                            );
-                            p.getPrescriptionList().add(presc);
-                        }
-                        catch(NumberFormatException ex){ex.printStackTrace();}
+                        );
+                        p.getPrescriptionList().add(presc);
+                    }
+                    catch(NumberFormatException ex){ex.printStackTrace();}
                 }
             }
         });
@@ -990,22 +1009,22 @@ public class Main extends Application{
             });
             return row;
         });
-        
+
         logappointment_btn.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent e) {
                 userviewgrid.getChildren().clear();
-                
+
                 ArrayList<Appointments> upcoming = new ArrayList<>();
-                
+
                 for (Appointments a : db.getAppointments()){
                     if (!user.getUsername().equals(a.getDoctorUsername()))
                         continue;
                     if (a.getUpcoming())
                         upcoming.add(a);
                 }
-                
+
                 loguappointments_tv.setItems(FXCollections.observableList(upcoming));
                 userviewgrid.add(logappointmentgrid, 0, 0);
             }
