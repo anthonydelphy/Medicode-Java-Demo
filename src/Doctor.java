@@ -1,29 +1,32 @@
+import java.util.Arrays;
 import java.util.List;
 
 public class Doctor extends Person{
 
-    private String patients[];
-    private String nurses[];
+    private List<String> patients;
+    private List<String> nurses;
 
-
-    public String[] getPatients() {
+    public List<String> getPatients() {
         return patients;
     }
 
-    public void setPatients(String[] patients) {
+    public void setPatients(List<String> patients) {
         this.patients = patients;
     }
 
-    public String getPatient(int index){
-        return patients[index];
-    }
-
-    public String[] getNurses() {
+    public List<String> getNurses() {
         return nurses;
     }
 
-    public void setNurses(String[] nurses) {
+    public void setNurses(List<String> nurses) {
         this.nurses = nurses;
     }
 
+    @Override
+    public String toString() {
+        return "Doctor{" +
+                "patients=" + patients +
+                ", nurses=" + nurses +
+                '}';
+    }
 }

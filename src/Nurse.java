@@ -1,15 +1,15 @@
-
+import java.util.List;
 
 public class Nurse extends Person{
 
-    private String patients[];
+    private List<String> patients;
     private String doctor;
 
-    public String[] getPatients() {
+    public List<String> getPatients() {
         return patients;
     }
 
-    public void setPatients(String[] patients) {
+    public void setPatients(List<String> patients) {
         this.patients = patients;
     }
 

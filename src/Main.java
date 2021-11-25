@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Locale;
 import java.util.Scanner;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -48,12 +49,12 @@ public class Main extends Application{
         return new String(encoded, encoding);
     }
 
-    public static void main(String[] args){
-        launch(args);
-    }
+	public static void main(String[] args){
+		launch(args);
+	}
 
-    @Override
-    public void start(Stage primaryStage) {
+	@Override
+	public void start(Stage primaryStage) {
         Gson gson = new Gson();
 
         String content = "";
@@ -73,12 +74,12 @@ public class Main extends Application{
         Scene primaryScene;
 
 /*******************************************************************************
- *                                                                              *
- *                                                                              *
- *                             Common Elements                                  *
- *                                                                              *
- *                                                                              *
- *******************************************************************************/
+*                                                                              *
+*                                                                              *
+*                             Common Elements                                  *
+*                                                                              *
+*                                                                              *
+*******************************************************************************/
         Button logout_btn           = new Button("Log Out");
         Button viewappointments_btn = new Button("View Appointments");
         Button viewmessages_btn     = new Button("View Messages");
@@ -87,15 +88,15 @@ public class Main extends Application{
 
 
 /*******************************************************************************
- *                                                                              *
- *                                                                              *
- *                               Screens                                        *
- *                                                                              *
- *                                                                              *
- *******************************************************************************/
+*                                                                              *
+*                                                                              *
+*                               Screens                                        *
+*                                                                              *
+*                                                                              *
+*******************************************************************************/
         /***********************************
-         *            Login Screen          *
-         ***********************************/
+        *            Login Screen          *
+        ***********************************/
         GridPane logingrid = new GridPane();
         logingrid.setAlignment(Pos.CENTER);
         logingrid.setHgap(10);
@@ -119,11 +120,11 @@ public class Main extends Application{
         logingrid.add(pwBox, 1, 2);
 
         Button login_btn = new Button("Sign in");
-        Button logincreateaccount_btn = new Button("Create account");
+		Button logincreateaccount_btn = new Button("Create account");
         VBox vbBtn = new VBox(10);
         vbBtn.setAlignment(Pos.BOTTOM_RIGHT);
         vbBtn.getChildren().add(login_btn);
-        vbBtn.getChildren().add(logincreateaccount_btn);
+		vbBtn.getChildren().add(logincreateaccount_btn);
         logingrid.add(vbBtn, 1, 4);
 
         Text loginFailText = new Text();
@@ -135,8 +136,8 @@ public class Main extends Application{
         primaryStage.show();
 
         /***********************************
-         *        Create Account Screen     *
-         ***********************************/
+        *        Create Account Screen     *
+        ***********************************/
         GridPane createaccountgrid = new GridPane();
         createaccountgrid.setAlignment(Pos.CENTER);
         createaccountgrid.setHgap(10);
@@ -158,7 +159,7 @@ public class Main extends Application{
         TextField lastnametf = new TextField();
         createaccountgrid.add(lastnametf, 1, 2);
 
-        createaccountgrid.add(new Label("Date of Birth:"), 0, 3);
+        createaccountgrid.add(new Label("Date of Birth (MM/DD/YYYY):"), 0, 3);
         TextField dobtf = new TextField();
         createaccountgrid.add(dobtf, 1, 3);
 
@@ -174,12 +175,12 @@ public class Main extends Application{
         createaccountgrid.add(createaccountcreate_btn, 1, 5);
 
 /*******************************************************************************
- *                                                                              *
- *                                                                              *
- *                            User Screen                                       *
- *                                                                              *
- *                                                                              *
- *******************************************************************************/
+*                                                                              *
+*                                                                              *
+*                            User Screen                                       *
+*                                                                              *
+*                                                                              *
+*******************************************************************************/
         GridPane userviewgrid = new GridPane();
         GridPane usergrid = new GridPane();
         //usergrid.setAlignment(Pos.CENTER);
@@ -189,8 +190,8 @@ public class Main extends Application{
         usergrid.add(userviewgrid, 1, 0);
 
         /***********************************
-         *          Patient Elements        *
-         ***********************************/
+        *          Patient Elements        *
+        ***********************************/
         Button viewprescriptions_btn = new Button("View Prescriptions");
         Button viewdoctor_btn        = new Button("View Doctor");
         Button changedoctor_btn      = new Button("Change Doctor");
@@ -199,8 +200,8 @@ public class Main extends Application{
         pbtnvbox.setPrefWidth(150);
 
         /***********************************
-         *           Doctor Elements        *
-         ***********************************/
+        *           Doctor Elements        *
+        ***********************************/
         Button createpatient_btn   = new Button("Create Patient");
         Button logappointment_btn  = new Button("Log Appointment");
         Button patientsearch_btn   = new Button("Patient Search");
@@ -213,16 +214,16 @@ public class Main extends Application{
 
 
 /*******************************************************************************
- *                                                                              *
- *                                                                              *
- *                          Logged in Screen                                    *
- *                                                                              *
- *                                                                              *
- *******************************************************************************/
+*                                                                              *
+*                                                                              *
+*                          Logged in Screen                                    *
+*                                                                              *
+*                                                                              *
+*******************************************************************************/
 
         /***********************************
-         *    Appointment Table Columns     *
-         ***********************************/
+        *    Appointment Table Columns     *
+        ***********************************/
         TableColumn<Appointments, String> datecol = new TableColumn<>("Date");
         datecol.setCellValueFactory(new PropertyValueFactory<>("date"));
 
@@ -239,8 +240,8 @@ public class Main extends Application{
         patientcol.setCellValueFactory(new PropertyValueFactory<>("patientUsername"));
 
         /***********************************
-         *            Appointments          *
-         ***********************************/
+        *            Appointments          *
+        ***********************************/
         GridPane appointmentgrid = new GridPane();
         appointmentgrid.setAlignment(Pos.CENTER);
         appointmentgrid.setHgap(10);
@@ -260,10 +261,10 @@ public class Main extends Application{
 
         TableColumn<Appointments, String> ptimecol = new TableColumn<>("Time");
         ptimecol.setCellValueFactory(new PropertyValueFactory<>("time"));
-
+        
         TableColumn<Appointments, String> ppatientcol = new TableColumn<>("Patient");
         ppatientcol.setCellValueFactory(new PropertyValueFactory<>("patientUsername"));
-
+        
         pappointments_tv.getColumns().add(pdatecol);
         pappointments_tv.getColumns().add(ptimecol);
         pappointments_tv.getColumns().add(concernscol);
@@ -274,8 +275,8 @@ public class Main extends Application{
         appointmentgrid.add(pappointments_tv                        , 0, 3);
 
         /***********************************
-         *  Previous Appointment Sub Window *
-         ***********************************/
+        *  Previous Appointment Sub Window *
+        ***********************************/
         GridPane subappointmentgrid = new GridPane();
         subappointmentgrid.setAlignment(Pos.CENTER);
         subappointmentgrid.setHgap(10);
@@ -314,8 +315,8 @@ public class Main extends Application{
         subappointmentwindow.setScene(new Scene(subappointmentgrid));
 
         /***********************************
-         *         Log Appointments         *
-         ***********************************/
+        *         Log Appointments         *
+        ***********************************/
         GridPane logappointmentgrid = new GridPane();
         logappointmentgrid.setAlignment(Pos.CENTER);
         logappointmentgrid.setHgap(10);
@@ -323,7 +324,7 @@ public class Main extends Application{
         logappointmentgrid.setPadding(new Insets(25, 25, 25, 25));
 
         TableView<Appointments> loguappointments_tv = new TableView<>();
-
+        
         TableColumn<Appointments, String> ldatecol = new TableColumn<>("Date");
         ldatecol.setCellValueFactory(new PropertyValueFactory<>("date"));
 
@@ -344,8 +345,8 @@ public class Main extends Application{
         logappointmentgrid.add(loguappointments_tv, 0, 0);
 
         /***********************************
-         *         Make Appointments        *
-         ***********************************/
+        *         Make Appointments        *
+        ***********************************/
         GridPane makeappointmentgrid = new GridPane();
         makeappointmentgrid.setAlignment(Pos.CENTER);
         makeappointmentgrid.setHgap(10);
@@ -370,8 +371,8 @@ public class Main extends Application{
         makeappointmentgrid.add(addappointment_btn             , 1, 4);
 
         /***********************************
-         *        View Prescriptions        *
-         ***********************************/
+        *        View Prescriptions        *
+        ***********************************/
         GridPane vprescriptiongrid = new GridPane();
         vprescriptiongrid.setAlignment(Pos.CENTER);
         vprescriptiongrid.setHgap(10);
@@ -397,8 +398,8 @@ public class Main extends Application{
         vprescriptiongrid.add(prescriptions_tv                , 0, 1);
 
         /***********************************
-         *        Prescribe Medication      *
-         ***********************************/
+        *        Prescribe Medication      *
+        ***********************************/
         GridPane dprescribegrid = new GridPane();
         dprescribegrid.setAlignment(Pos.CENTER);
         dprescribegrid.setHgap(10);
@@ -424,8 +425,8 @@ public class Main extends Application{
 
 
         /***********************************
-         *             View Doctor          *
-         ***********************************/
+        *             View Doctor          *
+        ***********************************/
         GridPane vdoctorgrid = new GridPane();
         vdoctorgrid.setAlignment(Pos.CENTER);
         vdoctorgrid.setHgap(10);
@@ -441,25 +442,39 @@ public class Main extends Application{
         vdoctorgrid.add(docphone   , 0, 2);
 
         /***********************************
-         *            View Profile          *
-         ***********************************/
-        GridPane vprofilegrid = new GridPane();
-        vprofilegrid.setAlignment(Pos.CENTER);
-        vprofilegrid.setHgap(10);
-        vprofilegrid.setVgap(10);
-        vprofilegrid.setPadding(new Insets(25, 25, 25, 25));
+        *            View Profile          *
+        ***********************************/
+        GridPane viewProfilegrid = new GridPane();
+        viewProfilegrid.setAlignment(Pos.CENTER);
+        viewProfilegrid.setHgap(10);
+        viewProfilegrid.setVgap(10);
+        viewProfilegrid.setPadding(new Insets(25, 25, 25, 25));
 
         Label username_l = new Label("");
-        Label fullname_l = new Label("");
-        Label phone_l    = new Label("");
+        TextField firstName_tf = new TextField("");
+        firstName_tf.setEditable(false);
+        TextField lastName_tf = new TextField("");
+        lastName_tf.setEditable(false);
+        TextField phone_tf    = new TextField("");
+        phone_tf.setEditable(false);
 
-        vprofilegrid.add(username_l, 0, 0);
-        vprofilegrid.add(fullname_l, 0, 1);
-        vprofilegrid.add(phone_l   , 0, 2);
+        Button editProfile_btn   = new Button("Edit Profile");
+        Button vprofile_save_btn = new Button("Save Changes");
+        vprofile_save_btn.setVisible(false);
+
+        viewProfilegrid.add(username_l,                       1,0);
+        viewProfilegrid.add(editProfile_btn,                  2,0);
+        viewProfilegrid.add(new Label("First Name: "),   0,1);
+        viewProfilegrid.add(firstName_tf,                     1,1);
+        viewProfilegrid.add(new Label("Last Name: "),    0,2);
+        viewProfilegrid.add(lastName_tf,                      1,2);
+        viewProfilegrid.add(new Label("Phone Number: "), 0,3);
+        viewProfilegrid.add(phone_tf,                         1,3);
+        viewProfilegrid.add(vprofile_save_btn,                1,4);
 
         /***********************************
-         *           Change Doctor          *
-         ***********************************/
+        *           Change Doctor          *
+        ***********************************/
         GridPane changedocgrid = new GridPane();
         changedocgrid.setAlignment(Pos.CENTER);
         changedocgrid.setHgap(10);
@@ -488,8 +503,8 @@ public class Main extends Application{
         changedocgrid.add(docs_tv              , 0, 1);
 
         /***********************************
-         *             View Nurses          *
-         ***********************************/
+        *             View Nurses          *
+        ***********************************/
         GridPane vnursegrid = new GridPane();
         vnursegrid.setAlignment(Pos.CENTER);
         vnursegrid.setHgap(10);
@@ -521,8 +536,8 @@ public class Main extends Application{
         vnursegrid.add(nurses_tv           , 0, 1);
 
         /***********************************
-         *            View Patients         *
-         ***********************************/
+        *            View Patients         *
+        ***********************************/
         GridPane vpatientgrid = new GridPane();
         vpatientgrid.setAlignment(Pos.CENTER);
         vpatientgrid.setHgap(10);
@@ -554,8 +569,8 @@ public class Main extends Application{
         vpatientgrid.add(patients_tv           , 0, 1);
 
         /***********************************
-         *              Messages            *
-         ***********************************/
+        *              Messages            *
+        ***********************************/
         GridPane messagegrid = new GridPane();
         messagegrid.setAlignment(Pos.CENTER);
         messagegrid.setHgap(10);
@@ -584,8 +599,8 @@ public class Main extends Application{
         messagegrid.add(messages_tv                , 0, 1);
 
         /***********************************
-         *        Messages Sub window       *
-         ***********************************/
+        *        Messages Sub window       *
+        ***********************************/
         GridPane submessagegrid = new GridPane();
         submessagegrid.setAlignment(Pos.CENTER);
         submessagegrid.setHgap(10);
@@ -598,10 +613,12 @@ public class Main extends Application{
         TextArea  message_ta = new TextArea();
         message_ta.setWrapText(true);
 
-        submessagegrid.add(sender_tf , 0, 0);
-        submessagegrid.add(subject_tf, 0, 1);
-        submessagegrid.add(message_ta, 0, 2);
+        Label messageError = new Label();
 
+        submessagegrid.add(sender_tf ,  0, 0);
+        submessagegrid.add(subject_tf,  0, 1);
+        submessagegrid.add(message_ta,  0, 2);
+        submessagegrid.add(messageError,0, 4);
         Button subsend_btn = new Button("Send");
 
         Stage submessagewindow = new Stage();
@@ -609,12 +626,12 @@ public class Main extends Application{
 
 
 /*******************************************************************************
- *                                                                              *
- *                                                                              *
- *                               Event Listeners                                *
- *                                                                              *
- *                                                                              *
- *******************************************************************************/
+*                                                                              *
+*                                                                              *
+*                               Event Listeners                                *
+*                                                                              *
+*                                                                              *
+*******************************************************************************/
 
         logout_btn.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -648,18 +665,18 @@ public class Main extends Application{
                     if (p instanceof Patient){
                         usergrid.getChildren().remove(dbtnvbox);
                         usergrid.add(pbtnvbox, 0, 0);
-
+                        
                         pbtnvbox.getChildren().clear();
                         dbtnvbox.getChildren().clear();
                         pbtnvbox.getChildren().addAll(
-                                logout_btn, viewappointments_btn, viewprescriptions_btn,
-                                viewdoctor_btn, changedoctor_btn, viewnurses_btn,
-                                viewmessages_btn, viewprofile_btn
+                        logout_btn, viewappointments_btn, viewprescriptions_btn,
+                        viewdoctor_btn, changedoctor_btn, viewnurses_btn,
+                        viewmessages_btn, viewprofile_btn
                         );
-
+                        
                         for (Node b : pbtnvbox.getChildren())
                             ((Button) b).prefWidthProperty().bind(pbtnvbox.widthProperty());
-
+                        
                         uappointments_tv.getColumns().remove(patientcol);
                         pappointments_tv.getColumns().remove(ppatientcol);
 
@@ -668,24 +685,24 @@ public class Main extends Application{
                     else if (p instanceof Doctor){
                         usergrid.getChildren().remove(pbtnvbox);
                         usergrid.add(dbtnvbox, 0, 0);
-
+                        
                         pbtnvbox.getChildren().clear();
                         dbtnvbox.getChildren().clear();
                         dbtnvbox.getChildren().addAll(
-                                logout_btn, viewappointments_btn, createpatient_btn,
-                                logappointment_btn, patientsearch_btn, viewnurses_btn,
-                                viewpatients_btn, prescribemed_btn, makeappointment_btn,
-                                viewmessages_btn, viewprofile_btn
+                        logout_btn, viewappointments_btn, createpatient_btn,
+                        logappointment_btn, patientsearch_btn, viewnurses_btn,
+                        viewpatients_btn, prescribemed_btn, makeappointment_btn,
+                        viewmessages_btn, viewprofile_btn
                         );
 
                         for (Node b : dbtnvbox.getChildren())
                             ((Button) b).prefWidthProperty().bind(dbtnvbox.widthProperty());
-
+                        
                         uappointments_tv.getColumns().remove(concerncol);
                         pappointments_tv.getColumns().remove(concernscol);
                         uappointments_tv.getColumns().remove(patientcol);
                         pappointments_tv.getColumns().remove(ppatientcol);
-
+                        
                         uappointments_tv.getColumns().add(patientcol);
                         pappointments_tv.getColumns().add(ppatientcol);
                         uappointments_tv.getColumns().add(concerncol);
@@ -706,19 +723,85 @@ public class Main extends Application{
             }
         });
 
+        editProfile_btn.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+
+                editProfile_btn.setVisible(false);
+                firstName_tf.setEditable(true);
+                lastName_tf.setEditable(true);
+                phone_tf.setEditable(true);
+                vprofile_save_btn.setVisible(true);
+
+            }
+        });
+
+        vprofile_save_btn.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+
+                /* Doesn't work for some reason...............
+                if(
+                        firstnametf.getText().length() == 0 ||
+                        lastnametf.getText().length()  == 0 ||
+                        phone_tf.getText().length()    == 0
+                )
+                    return;
+                 */
+
+                user.setFirstName(firstName_tf.getText());
+                user.setLastName(lastName_tf.getText());
+                user.setPhone(phone_tf.getText());
+
+                firstName_tf.setEditable(false);
+                lastName_tf.setEditable(false);
+                phone_tf.setEditable(false);
+                vprofile_save_btn.setVisible(false);
+                editProfile_btn.setVisible(true);
+
+            }
+        });
+
         createaccountcreate_btn.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent e) {
                 if (
-                        firstnametf.getText().length()  == 0 ||
-                                lastnametf.getText().length()   == 0 ||
-                                dobtf.getText().length()        == 0 ||
-                                passwordtf.getText().length()   == 0
+                    firstnametf.getText().length()  == 0 ||
+                    lastnametf.getText().length()   == 0 ||
+                    dobtf.getText().length()        == 0 ||
+                    passwordtf.getText().length()   == 0
                 ){
                     fillallfields.setText("Please fill all fields!");
                     return;
                 }
+
+                Patient newPatient = new Patient();
+                newPatient.setFirstName(firstnametf.getText());
+                newPatient.setLastName(lastnametf.getText());
+                newPatient.setBirthday(dobtf.getText());
+                newPatient.setPassword(passwordtf.getText());
+                String usableBday = dobtf.getText();
+                usableBday = usableBday.replaceAll("/", "");
+                String username = firstnametf.getText() + lastnametf.getText() + usableBday;
+                username = username.toLowerCase(Locale.ROOT);
+
+                for (Person p : db.allpeople) {
+                    if(p.getUsername().equals(username)) {
+                        fillallfields.setText("This account already exists!");
+                        return;
+                    }
+                }
+
+                System.out.println("New username = " + username);
+                newPatient.setUsername(username);
+
+                db.getPatientList().add(newPatient);
+                db.allpeople.add(newPatient);
+
+                fillallfields.setText("Account Created! Your username is: " + username);
             }
         });
 
@@ -741,7 +824,7 @@ public class Main extends Application{
 
                 for (Appointments a : db.getAppointments()){
                     if (!(user.getUsername().equals(a.getPatientUsername()) ||
-                            user.getUsername().equals(a.getDoctorUsername())))
+                          user.getUsername().equals(a.getDoctorUsername())))
                         continue;
                     if (a.getUpcoming())
                         upcoming.add(a);
@@ -775,13 +858,13 @@ public class Main extends Application{
                     if (!p.getUsername().equals(dprecuser_tf.getText()))
                         continue;
                     try{
-                        Prescription presc = new Prescription(
+                            Prescription presc = new Prescription(
                                 dprecmeds_tf.getText(), dprecexp_tf.getText(),
                                 Integer.parseInt(dprecqty_tf.getText())
-                        );
-                        p.getPrescriptionList().add(presc);
-                    }
-                    catch(NumberFormatException ex){ex.printStackTrace();}
+                            );
+                            p.getPrescriptionList().add(presc);
+                        }
+                        catch(NumberFormatException ex){ex.printStackTrace();}
                 }
             }
         });
@@ -829,10 +912,12 @@ public class Main extends Application{
             public void handle(ActionEvent e) {
                 userviewgrid.getChildren().clear();
 
-                username_l.setText("Username: " + user.getUsername());
-                fullname_l.setText("Name: " + user.getFirstName() + " " + user.getLastName());
-                phone_l.setText("Phone Number: " + user.getPhone());
-                userviewgrid.add(vprofilegrid, 0, 0);
+
+                username_l.setText(user.getUsername());
+                firstName_tf.setText(user.getFirstName());
+                lastName_tf.setText(user.getLastName());
+                phone_tf.setText(user.getPhone());
+                userviewgrid.add(viewProfilegrid, 0, 0);
                 return;
             }
         });
@@ -857,14 +942,34 @@ public class Main extends Application{
             }
         });
 
+
+        //When patient wants to change the doctor, it will replace the doctor username in their
+        // json with the newly chosen doctor and remove the patient from their former doctor's patient list
         changedocchange_btn.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent e) {
-                Doctor d = docs_tv.getSelectionModel().getSelectedItem();
+                Doctor d = docs_tv.getSelectionModel().getSelectedItem(); //Newly chosen doctor
+
+                //Make sure user can't press the button without selecting a doctor
                 if (d == null)
                     return;
-                System.out.println(d);
+
+                //Long anc convoluted way to get rid of the patient from the doctors list :)
+                for (Doctor doof: db.getDoctorsList()) {
+                   if(!doof.getUsername().equals(((Patient)user).getDoctor()))
+                       continue;
+
+                   doof.getPatients().remove(user.getUsername());
+                }
+                ((Patient) user).setDoctor(d.getUsername()); //Set newly chosen doctor for patient
+
+                //Make sure patient isn't repeated
+                d.getPatients().remove(user.getUsername());
+               //Add a new patient to a doctor's list
+                d.getPatients().add(user.getUsername());
+
+                db.updateJSON();
             }
         });
 
@@ -946,16 +1051,27 @@ public class Main extends Application{
 
             @Override
             public void handle(ActionEvent e) {
+                Boolean messageSent = false;
+
                 for (Person p : db.allpeople){
                     if (!p.getUsername().equals(sender_tf.getText()))
                         continue;
+
                     Message m = new Message();
                     m.setSender(user.getUsername());
                     m.setRecipient(p.getUsername());
                     m.setSubject(subject_tf.getText());
                     m.setMessage(message_ta.getText());
                     p.getMessages().add(m);
+                    messageSent = true;
                 }
+
+                if(!messageSent) {
+                    messageError.setText("There is nobody with that username. Please try again.");
+                    return;
+                }
+
+
                 submessagewindow.hide();
             }
         });
@@ -1009,22 +1125,22 @@ public class Main extends Application{
             });
             return row;
         });
-
+        
         logappointment_btn.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent e) {
                 userviewgrid.getChildren().clear();
-
+                
                 ArrayList<Appointments> upcoming = new ArrayList<>();
-
+                
                 for (Appointments a : db.getAppointments()){
                     if (!user.getUsername().equals(a.getDoctorUsername()))
                         continue;
                     if (a.getUpcoming())
                         upcoming.add(a);
                 }
-
+                
                 loguappointments_tv.setItems(FXCollections.observableList(upcoming));
                 userviewgrid.add(logappointmentgrid, 0, 0);
             }
