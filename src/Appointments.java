@@ -5,6 +5,7 @@ public class Appointments implements Comparable<Appointments>{
     private String patientUsername;
     private String doctorUsername;
     private String concern;
+    private Boolean upcoming;
 
     //PAST APPOINTMENT VARIABLES
     private String concerns;
@@ -12,7 +13,7 @@ public class Appointments implements Comparable<Appointments>{
     private float temperature;
     private String height;
     private String allergies;
-    private Boolean upcoming;
+
 
     public String upcomingAppointmentToString() {
         return "Appointments{" +
@@ -73,7 +74,7 @@ public class Appointments implements Comparable<Appointments>{
         return temperature;
     }
 
-    public void setTemperature(int temperature) {
+    public void setTemperature(float temperature) {
         this.temperature = temperature;
     }
 

@@ -9,10 +9,8 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Locale;
-import java.util.Scanner;
+import java.util.*;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -204,10 +202,10 @@ public class Main extends Application{
         ***********************************/
         Button createpatient_btn   = new Button("Create Patient");
         Button logappointment_btn  = new Button("Log Appointment");
+        Button makeappointment_btn = new Button("Make Appointment");
         Button patientsearch_btn   = new Button("Patient Search");
         Button viewpatients_btn    = new Button("View Patients");
         Button prescribemed_btn    = new Button("Prescribe Medication");
-        Button makeappointment_btn = new Button("Make Appointment");
 
         VBox dbtnvbox = new VBox();
         dbtnvbox.setPrefWidth(150);
@@ -292,6 +290,7 @@ public class Main extends Application{
         TextField subappallergies_tf = new TextField("");
 
         Button sublog_btn            = new Button("Log");
+        Label loggedApptLabel         = new Label("");
 
         subappointmentgrid.add(new Label("Patient Username: "), 0, 0);
         subappointmentgrid.add(new Label("Doctor Username: " ), 0, 1);
@@ -310,6 +309,7 @@ public class Main extends Application{
         subappointmentgrid.add(subappallergies_tf             , 1, 6);
 
         subappointmentgrid.add(sublog_btn                     , 1, 7);
+        subappointmentgrid.add(loggedApptLabel, 0,8);
 
         Stage subappointmentwindow = new Stage();
         subappointmentwindow.setScene(new Scene(subappointmentgrid));
@@ -318,11 +318,13 @@ public class Main extends Application{
         *         Log Appointments         *
         ***********************************/
         GridPane logappointmentgrid = new GridPane();
+
         logappointmentgrid.setAlignment(Pos.CENTER);
         logappointmentgrid.setHgap(10);
         logappointmentgrid.setVgap(10);
         logappointmentgrid.setPadding(new Insets(25, 25, 25, 25));
 
+        Label logUpcomingAppointmentLabel = new Label("Upcoming Appointments:");
         TableView<Appointments> loguappointments_tv = new TableView<>();
         
         TableColumn<Appointments, String> ldatecol = new TableColumn<>("Date");
@@ -342,7 +344,8 @@ public class Main extends Application{
         loguappointments_tv.getColumns().add(lpatientcol);
         loguappointments_tv.getColumns().add(lconcerncol);
 
-        logappointmentgrid.add(loguappointments_tv, 0, 0);
+        logappointmentgrid.add(logUpcomingAppointmentLabel, 0 ,0);
+        logappointmentgrid.add(loguappointments_tv, 0, 1);
 
         /***********************************
         *         Make Appointments        *
@@ -357,18 +360,20 @@ public class Main extends Application{
         TextField dappointdate_tf    = new TextField();
         TextField dappointtime_tf    = new TextField();
         TextField dappointconcern_tf = new TextField();
+        Label newApptLabel = new Label();
 
         Button addappointment_btn = new Button("Add Appointment");
 
         makeappointmentgrid.add(new Label("Patient Username: "), 0, 0);
         makeappointmentgrid.add(dappointuser_tf                , 1, 0);
-        makeappointmentgrid.add(new Label("Date: ")            , 0, 1);
+        makeappointmentgrid.add(new Label("Date (MM/DD/YYYY): ")            , 0, 1);
         makeappointmentgrid.add(dappointdate_tf                , 1, 1);
         makeappointmentgrid.add(new Label("Time: ")            , 0, 2);
         makeappointmentgrid.add(dappointtime_tf                , 1, 2);
         makeappointmentgrid.add(new Label("Concern: ")         , 0, 3);
         makeappointmentgrid.add(dappointconcern_tf             , 1, 3);
         makeappointmentgrid.add(addappointment_btn             , 1, 4);
+        makeappointmentgrid.add(newApptLabel,0,5);
 
         /***********************************
         *        View Prescriptions        *
@@ -390,6 +395,8 @@ public class Main extends Application{
         TableColumn<Prescription, Integer> qtycol = new TableColumn<>("Qty.");
         qtycol.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 
+
+
         prescriptions_tv.getColumns().add(prescnamecol);
         prescriptions_tv.getColumns().add(expdatecol);
         prescriptions_tv.getColumns().add(qtycol);
@@ -410,18 +417,20 @@ public class Main extends Application{
         TextField dprecmeds_tf = new TextField();
         TextField dprecexp_tf  = new TextField();
         TextField dprecqty_tf  = new TextField();
+        Label prescMedMessage_l = new Label("");
 
         Button prescribe_btn = new Button("Prescribe");
 
         dprescribegrid.add(new Label("Patient Username: "), 0, 0);
         dprescribegrid.add(dprecuser_tf                   , 1, 0);
-        dprescribegrid.add(new Label("Medication: ")      , 0, 1);
+        dprescribegrid.add(new Label("Medication and Dosage: ")      , 0, 1);
         dprescribegrid.add(dprecmeds_tf                   , 1, 1);
         dprescribegrid.add(new Label("Expiration Date: ") , 0, 2);
         dprescribegrid.add(dprecexp_tf                    , 1, 2);
-        dprescribegrid.add(new Label("Quantity: ")        , 0, 3);
+        dprescribegrid.add(new Label("Quantity (Integers Only): ")        , 0, 3);
         dprescribegrid.add(dprecqty_tf                    , 1, 3);
         dprescribegrid.add(prescribe_btn                  , 1, 4);
+        dprescribegrid.add(prescMedMessage_l, 0,5);
 
 
         /***********************************
@@ -689,10 +698,10 @@ public class Main extends Application{
                         pbtnvbox.getChildren().clear();
                         dbtnvbox.getChildren().clear();
                         dbtnvbox.getChildren().addAll(
-                        logout_btn, viewappointments_btn, createpatient_btn,
-                        logappointment_btn, patientsearch_btn, viewnurses_btn,
-                        viewpatients_btn, prescribemed_btn, makeappointment_btn,
-                        viewmessages_btn, viewprofile_btn
+                        logout_btn, viewappointments_btn, makeappointment_btn,
+                                logappointment_btn, prescribemed_btn,
+                                createpatient_btn, viewnurses_btn,
+                                viewpatients_btn, viewmessages_btn, viewprofile_btn
                         );
 
                         for (Node b : dbtnvbox.getChildren())
@@ -723,6 +732,52 @@ public class Main extends Application{
             }
         });
 
+        addappointment_btn.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                Appointments newAppt = new Appointments();
+
+                newAppt.setUpcoming(true);
+                newAppt.setConcerns(dappointconcern_tf.getText());
+                newAppt.setTime(dappointtime_tf.getText());
+                newAppt.setDate(dappointdate_tf.getText());
+                newAppt.setPatientUsername(dappointuser_tf.getText());
+                newAppt.setDoctorUsername(user.getUsername());
+                newApptLabel.setText("Appointment Added!");
+
+                List<Appointments> temp = db.getAppointments();
+                temp.add(newAppt);
+                db.setAppointments(temp);
+
+
+
+            }
+        });
+
+
+
+
+        addappointment_btn.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                Appointments newAppt = new Appointments();
+
+                newAppt.setUpcoming(true);
+                newAppt.setConcerns(dappointconcern_tf.getText());
+                newAppt.setTime(dappointtime_tf.getText());
+                newAppt.setDate(dappointdate_tf.getText());
+                newAppt.setPatientUsername(dappointuser_tf.getText());
+                newAppt.setDoctorUsername(user.getUsername());
+                newApptLabel.setText("Appointment Added!");
+
+                List<Appointments> temp = db.getAppointments();
+                temp.add(newAppt);
+                db.setAppointments(temp);
+            }
+        });
+
         editProfile_btn.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
@@ -737,19 +792,59 @@ public class Main extends Application{
             }
         });
 
+
+        prescribe_btn.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                for (Patient p : db.getPatientList()) {
+                    if (!p.getUsername().toLowerCase(Locale.ROOT)
+                            .equals(dprecuser_tf.getText().toLowerCase(Locale.ROOT)))
+                        continue;
+
+                    try {
+                        Prescription presc = new Prescription(
+                                dprecmeds_tf.getText(), dprecexp_tf.getText(),
+                                Integer.parseInt(dprecqty_tf.getText())
+                        );
+
+                        Boolean repeat = false;
+                        for(int x = 0; x <p.getPrescriptions().size();x++){
+                            if(p.getPrescriptions().get(x).toString().toLowerCase(Locale.ROOT)
+                                    .equals(presc.toString().toLowerCase(Locale.ROOT))){
+                                prescMedMessage_l.setText("This patient already has this prescription");
+                                repeat = true;
+                                break;
+                            }
+                        }
+
+                        if(!repeat) {
+                            List<Prescription> temp = p.getPrescriptions();
+                            temp.add(presc);
+                            p.setPrescriptions(temp);
+                            prescMedMessage_l.setText("Success!");
+                        }
+
+
+                    } catch (NumberFormatException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        });
+
         vprofile_save_btn.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent e) {
 
-                /* Doesn't work for some reason...............
+                /*works for some reason...............*/
                 if(
-                        firstnametf.getText().length() == 0 ||
-                        lastnametf.getText().length()  == 0 ||
-                        phone_tf.getText().length()    == 0
+                        firstName_tf.getText().length() == 0 ||
+                        lastName_tf.getText().length()  == 0 ||
+                        phone_tf.getText().length()     == 0
                 )
                     return;
-                 */
 
                 user.setFirstName(firstName_tf.getText());
                 user.setLastName(lastName_tf.getText());
@@ -842,9 +937,11 @@ public class Main extends Application{
             @Override
             public void handle(ActionEvent e) {
                 userviewgrid.getChildren().clear();
-                if (((Patient)user).getPrescriptionList() != null)
-                    prescriptions_tv.setItems(FXCollections.observableList(((Patient)user).getPrescriptionList()));
+                if (((Patient)user).getPrescriptions() != null)
+                    prescriptions_tv.setItems(FXCollections.observableList(((Patient)user).getPrescriptions()));
                 userviewgrid.add(prescriptions_tv, 0, 0);
+
+
             }
         });
 
@@ -854,18 +951,6 @@ public class Main extends Application{
             public void handle(ActionEvent e) {
                 userviewgrid.getChildren().clear();
                 userviewgrid.add(dprescribegrid, 0, 0);
-                for (Patient p : db.getPatientList()){
-                    if (!p.getUsername().equals(dprecuser_tf.getText()))
-                        continue;
-                    try{
-                            Prescription presc = new Prescription(
-                                dprecmeds_tf.getText(), dprecexp_tf.getText(),
-                                Integer.parseInt(dprecqty_tf.getText())
-                            );
-                            p.getPrescriptionList().add(presc);
-                        }
-                        catch(NumberFormatException ex){ex.printStackTrace();}
-                }
             }
         });
 
@@ -1101,6 +1186,7 @@ public class Main extends Application{
             TableRow<Appointments> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())){
+                    loggedApptLabel.setText("");
                     Appointments a = row.getItem();
                     sublog_btn.setVisible(false);
 
@@ -1168,13 +1254,39 @@ public class Main extends Application{
                     subapptemp_tf.setEditable(true);
                     subappheight_tf.setEditable(true);
                     subappallergies_tf.setEditable(true);
-
                     subappointmentwindow.show();
                 }
             });
             return row;
         });
+        sublog_btn.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+
+                Appointments selected = loguappointments_tv.getSelectionModel().getSelectedItem();
+
+                if(!subappallergies_tf.getText().equals("") &&
+                        !subappconcerns_tf.getText().equals("") &&
+                        !subappbp_tf.getText().equals("") &&
+                        !subappheight_tf.getText().equals("") &&
+                        !subapptemp_tf.getText().equals("")) {
+                    Appointments loggedAppt = selected;
+                    loggedAppt.setUpcoming(false);
+                    loggedAppt.setConcerns(subappconcerns_tf.getText());
+                    loggedAppt.setAllergies(subappallergies_tf.getText());
+                    loggedAppt.setBloodPressure(subappbp_tf.getText());
+                    loggedAppt.setHeight(subappheight_tf.getText());
+                    loggedAppt.setTemperature(Float.parseFloat(subapptemp_tf.getText()));
+                    loggedApptLabel.setText("Logged!");
+                }
+
+            }
+        });
+
     }
+
+
 
     @Override
     public void stop(){

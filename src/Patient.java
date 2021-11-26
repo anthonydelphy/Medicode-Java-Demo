@@ -1,4 +1,6 @@
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Patient extends Person{
@@ -9,11 +11,11 @@ public class Patient extends Person{
     public List<Prescription> prescriptionList;
 
     public List<Prescription> getPrescriptions() {
-        return prescriptionList;
-    }
+        if(prescriptionList == null || prescriptionList.isEmpty()) {
+            List<Prescription> temp = new ArrayList<>();
+            return temp;
+        }
 
-    //Returns full list of prescriptions.
-    public List<Prescription> getPrescriptionList() {
         return prescriptionList;
     }
 
