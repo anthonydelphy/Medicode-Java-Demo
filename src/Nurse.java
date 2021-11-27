@@ -4,6 +4,7 @@ public class Nurse extends Person{
 
     private List<String> patients;
     private String doctor;
+    public transient Doctor doctorObject;
 
     public List<String> getPatients() {
         return patients;

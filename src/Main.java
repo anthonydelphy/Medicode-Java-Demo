@@ -65,6 +65,20 @@ public class Main extends Application{
         db.puteveryoneinallpeople();
         Collections.sort(db.getAppointments());
 
+        Doctor temp = null;
+        for(Nurse n : db.getNursesList()){
+            for (Doctor d : db.getDoctorsList()){
+                if (d.getUsername().equals(n.getDoctor())) {
+                    temp = d;
+                    n.doctorObject = d;
+                }
+            }
+            if (temp == null) continue;
+
+            n.setPatients(temp.getPatients());
+        }
+
+
         primaryStage.setTitle("MEDICODE");
         primaryStage.setWidth(800);
         primaryStage.setHeight(600);
@@ -203,7 +217,6 @@ public class Main extends Application{
         Button createpatient_btn   = new Button("Create Patient");
         Button logappointment_btn  = new Button("Log Appointment");
         Button makeappointment_btn = new Button("Make Appointment");
-        Button patientsearch_btn   = new Button("Patient Search");
         Button viewpatients_btn    = new Button("View Patients");
         Button prescribemed_btn    = new Button("Prescribe Medication");
 
@@ -211,6 +224,13 @@ public class Main extends Application{
         dbtnvbox.setPrefWidth(150);
 
 
+        //Nurse shares elements with all other classes
+        /***********************************
+         *           Nurse Elements        *
+         ***********************************/
+
+        VBox nbtnvbox = new VBox();
+        nbtnvbox.setPrefWidth(150);
 /*******************************************************************************
 *                                                                              *
 *                                                                              *
@@ -671,12 +691,15 @@ public class Main extends Application{
                     userTextField.setText("");
                     pwBox.setText("");
 
+                    //If the user logging in is a PATIENT
                     if (p instanceof Patient){
                         usergrid.getChildren().remove(dbtnvbox);
+                        usergrid.getChildren().remove(nbtnvbox);
                         usergrid.add(pbtnvbox, 0, 0);
-                        
+
                         pbtnvbox.getChildren().clear();
                         dbtnvbox.getChildren().clear();
+                        nbtnvbox.getChildren().clear();
                         pbtnvbox.getChildren().addAll(
                         logout_btn, viewappointments_btn, viewprescriptions_btn,
                         viewdoctor_btn, changedoctor_btn, viewnurses_btn,
@@ -691,12 +714,15 @@ public class Main extends Application{
 
                     }
 
+                    //If the user logging in is a DOCTOR
                     else if (p instanceof Doctor){
                         usergrid.getChildren().remove(pbtnvbox);
+                        usergrid.getChildren().remove(nbtnvbox);
                         usergrid.add(dbtnvbox, 0, 0);
-                        
+
                         pbtnvbox.getChildren().clear();
                         dbtnvbox.getChildren().clear();
+                        nbtnvbox.getChildren().clear();
                         dbtnvbox.getChildren().addAll(
                         logout_btn, viewappointments_btn, makeappointment_btn,
                                 logappointment_btn, prescribemed_btn,
@@ -718,11 +744,41 @@ public class Main extends Application{
                         pappointments_tv.getColumns().add(concernscol);
                     }
 
+                    //If the user logging in is a NURSE
+                    else if (p instanceof Nurse){
+                        usergrid.getChildren().remove(pbtnvbox);
+                        usergrid.getChildren().remove(dbtnvbox);
+                        usergrid.add(nbtnvbox, 0, 0);
+
+                        pbtnvbox.getChildren().clear();
+                        dbtnvbox.getChildren().clear();
+                        nbtnvbox.getChildren().clear();
+                        nbtnvbox.getChildren().addAll(
+                                logout_btn, viewappointments_btn, makeappointment_btn,
+                                logappointment_btn, createpatient_btn, viewdoctor_btn,
+                                viewpatients_btn, viewmessages_btn, viewprofile_btn
+                        );
+
+                        for (Node b : nbtnvbox.getChildren())
+                            ((Button) b).prefWidthProperty().bind(nbtnvbox.widthProperty());
+
+                        uappointments_tv.getColumns().remove(concerncol);
+                        pappointments_tv.getColumns().remove(concernscol);
+                        uappointments_tv.getColumns().remove(patientcol);
+                        pappointments_tv.getColumns().remove(ppatientcol);
+
+                        uappointments_tv.getColumns().add(patientcol);
+                        pappointments_tv.getColumns().add(ppatientcol);
+                        uappointments_tv.getColumns().add(concerncol);
+                        pappointments_tv.getColumns().add(concernscol);
+                    }
+
                     return;
                 }
                 loginFailText.setText("Incorrect Username or Password");
             }
         });
+
 
         createaccountback_btn.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -764,12 +820,19 @@ public class Main extends Application{
             public void handle(ActionEvent e) {
                 Appointments newAppt = new Appointments();
 
+
+
                 newAppt.setUpcoming(true);
                 newAppt.setConcerns(dappointconcern_tf.getText());
                 newAppt.setTime(dappointtime_tf.getText());
                 newAppt.setDate(dappointdate_tf.getText());
                 newAppt.setPatientUsername(dappointuser_tf.getText());
-                newAppt.setDoctorUsername(user.getUsername());
+                if (user instanceof Nurse) {
+                    newAppt.setDoctorUsername(((Nurse)user).getDoctor());
+                }
+                else
+                    newAppt.setDoctorUsername(user.getUsername());
+
                 newApptLabel.setText("Appointment Added!");
 
                 List<Appointments> temp = db.getAppointments();
@@ -878,6 +941,7 @@ public class Main extends Application{
                 newPatient.setLastName(lastnametf.getText());
                 newPatient.setBirthday(dobtf.getText());
                 newPatient.setPassword(passwordtf.getText());
+                newPatient.setDoctor(db.getDoctorsList().get(0).getUsername());
                 String usableBday = dobtf.getText();
                 usableBday = usableBday.replaceAll("/", "");
                 String username = firstnametf.getText() + lastnametf.getText() + usableBday;
@@ -917,14 +981,27 @@ public class Main extends Application{
                 ArrayList<Appointments> upcoming = new ArrayList<>();
                 ArrayList<Appointments> previous = new ArrayList<>();
 
-                for (Appointments a : db.getAppointments()){
-                    if (!(user.getUsername().equals(a.getPatientUsername()) ||
-                          user.getUsername().equals(a.getDoctorUsername())))
-                        continue;
-                    if (a.getUpcoming())
-                        upcoming.add(a);
-                    else
-                        previous.add(a);
+                if (user instanceof Nurse) {
+                    for (Appointments a : db.getAppointments()) {
+                        if (!((Nurse) user).doctorObject.getUsername().equals(a.getDoctorUsername())) {
+                            continue;
+                        }
+                        if (a.getUpcoming())
+                            upcoming.add(a);
+                        else
+                            previous.add(a);
+                    }
+                }
+                else {
+                    for (Appointments a : db.getAppointments()) {
+                        if (!(user.getUsername().equals(a.getPatientUsername()) ||
+                                user.getUsername().equals(a.getDoctorUsername())))
+                            continue;
+                        if (a.getUpcoming())
+                            upcoming.add(a);
+                        else
+                            previous.add(a);
+                    }
                 }
                 uappointments_tv.setItems(FXCollections.observableList(upcoming));
                 pappointments_tv.setItems(FXCollections.observableList(previous));
@@ -940,8 +1017,6 @@ public class Main extends Application{
                 if (((Patient)user).getPrescriptions() != null)
                     prescriptions_tv.setItems(FXCollections.observableList(((Patient)user).getPrescriptions()));
                 userviewgrid.add(prescriptions_tv, 0, 0);
-
-
             }
         });
 
@@ -978,16 +1053,24 @@ public class Main extends Application{
             @Override
             public void handle(ActionEvent e) {
                 userviewgrid.getChildren().clear();
-                for (Doctor d : db.getDoctorsList()){
-                    if (!d.getUsername().equals(((Patient)user).getDoctor()))
-                        continue;
-
+                if(user instanceof Nurse) {
+                    Doctor d = ((Nurse)user).doctorObject;
                     docusername.setText("Username: " + d.getUsername());
                     docfullname.setText("Name: " + d.getFirstName() + " " + d.getLastName());
                     docphone.setText("Phone Number:" + d.getPhone());
                     userviewgrid.add(vdoctorgrid, 0, 0);
-                    return;
                 }
+                else
+                    for (Doctor d : db.getDoctorsList()){
+                        if (!d.getUsername().equals(((Patient)user).getDoctor()))
+                            continue;
+
+                        docusername.setText("Username: " + d.getUsername());
+                        docfullname.setText("Name: " + d.getFirstName() + " " + d.getLastName());
+                        docphone.setText("Phone Number:" + d.getPhone());
+                        userviewgrid.add(vdoctorgrid, 0, 0);
+                        return;
+                    }
             }
         });
 
@@ -1085,12 +1168,22 @@ public class Main extends Application{
             public void handle(ActionEvent e) {
                 userviewgrid.getChildren().clear();
                 ArrayList<Patient> p_al = new ArrayList<>();
-                for (Patient p : db.getPatientList()){
-                    for (String d_p : ((Doctor) user).getPatients()){
-                        if (p.getUsername().equals(d_p))
-                            p_al.add(p);
+
+                if(user instanceof Nurse){
+                    for (Patient p : db.getPatientList()){
+                        for (String d_p : ((Nurse) user).getPatients()){
+                            if (p.getUsername().equals(d_p))
+                                p_al.add(p);
+                        }
                     }
                 }
+                else
+                    for (Patient p : db.getPatientList()){
+                        for (String d_p : ((Doctor) user).getPatients()){
+                            if (p.getUsername().equals(d_p))
+                                p_al.add(p);
+                        }
+                    }
                 patients_tv.setItems(FXCollections.observableList(p_al));
                 userviewgrid.add(vpatientgrid, 0, 0);
             }
