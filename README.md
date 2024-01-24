@@ -1,3 +1,2 @@
-# CSE360Project
-
-This project utilizes the GSON library to parse the jsons.
+# Medicode Java Demo
+Developed while at ASU, this program builds an EHR (Electronic Healh Record) software system that allows for doctor/nurse/patient log-in and administration of medication by doctors to their patients.
